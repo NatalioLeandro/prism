@@ -1,5 +1,6 @@
 /* Flutter Imports */
 import 'package:flutter/material.dart';
+import 'package:prism/features/auth/presentation/pages/password_recover.dart';
 
 /* Project Imports */
 // import 'package:prism/features/transaction/presentation/pages/create.dart';
@@ -13,6 +14,7 @@ const String home = '/home';
 const String login = '/login';
 const String register = '/register';
 const String transaction = '/transaction';
+const String passwordRecover = '/password-recover';
 
 Route controller(RouteSettings settings) {
   switch (settings.name) {
@@ -31,6 +33,10 @@ Route controller(RouteSettings settings) {
     case register:
       return MaterialPageRoute(
         builder: (_) => const RegisterPage(),
+      );
+    case passwordRecover:
+      return MaterialPageRoute(
+        builder: (_) => const PasswordRecoverPage(),
       );
     // case transaction:
     //   return MaterialPageRoute(

@@ -100,4 +100,10 @@ class AuthRepositoryImpl implements AuthRepository {
       return left(Failure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> recover({required String email}) {
+    // TODO: implement recover
+    throw UnimplementedError();
+  }
 }

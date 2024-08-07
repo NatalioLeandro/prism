@@ -20,3 +20,5 @@ final class AuthSuccessState extends AuthState {
 
   const AuthSuccessState(this.user);
 }
+
+final class AuthPasswordRecoverSuccessState extends AuthState {}

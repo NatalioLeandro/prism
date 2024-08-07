@@ -12,21 +12,3 @@ class UserLoggedInState extends UserState {
     this.user,
   );
 }
-
-class UserAccountLoadingState extends UserState {}
-
-class UserAccountLoadedState extends UserState {
-  final AccountEntity account;
-
-  UserAccountLoadedState(
-    this.account,
-  );
-}
-
-class UserAppThemeState extends UserState {
-  final bool isDark;
-
-  UserAppThemeState(
-    this.isDark,
-  );
-}

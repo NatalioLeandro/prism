@@ -59,7 +59,7 @@ class _LoginFormState extends State<LoginForm> {
             onTap: () {
               Navigator.pushNamedAndRemoveUntil(
                 context,
-                routes.register,
+                routes.passwordRecover,
                 (route) => false,
               );
             },

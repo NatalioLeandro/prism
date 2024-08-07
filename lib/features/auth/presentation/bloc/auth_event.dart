@@ -27,6 +27,14 @@ final class AuthRegisterEvent extends AuthEvent {
   });
 }
 
+final class AuthPasswordRecoverEvent extends AuthEvent {
+  final String email;
+
+  AuthPasswordRecoverEvent({
+    required this.email,
+  });
+}
+
 final class AuthIsLoggedInEvent extends AuthEvent {}
 
 final class AuthLogoutEvent extends AuthEvent {}

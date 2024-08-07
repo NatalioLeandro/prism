@@ -18,6 +18,10 @@ abstract interface class AuthRepository {
     required String password,
   });
 
+  Future<Either<Failure, void>> recover({
+    required String email,
+  });
+
   Future<Either<Failure, void>> logout();
 
   Future<Either<Failure, UserEntity>> getCurrentUser();

@@ -17,7 +17,8 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateMixin {
+class _SplashPageState extends State<SplashPage>
+    with SingleTickerProviderStateMixin {
   late StreamSubscription<AuthState> _authSubscription;
 
   @override
@@ -32,13 +33,13 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
           Navigator.pushNamedAndRemoveUntil(
             context,
             routes.login,
-                (route) => false,
+            (route) => false,
           );
         } else if (state is AuthErrorState) {
           Navigator.pushNamedAndRemoveUntil(
             context,
             routes.login,
-                (route) => false,
+            (route) => false,
           );
         }
       });
@@ -60,11 +61,11 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SizedBox(height: 15),
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              child: Image(
-                image: AssetImage('assets/logo.png'),
-                height: 100,
+            Text(
+              'PRISM',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 15),

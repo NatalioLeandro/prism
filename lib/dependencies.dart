@@ -11,6 +11,7 @@ import 'package:prism/core/network/connection_checker.dart';
 
 /* Auth Feature Imports */
 import 'package:prism/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:prism/features/auth/domain/usecases/user_password_recover.dart';
 import 'package:prism/features/auth/domain/repositories/auth_repository.dart';
 import 'package:prism/features/auth/domain/usecases/user_register.dart';
 import 'package:prism/features/auth/domain/usecases/current_user.dart';

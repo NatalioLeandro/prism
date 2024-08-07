@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /* Project Imports */
-import 'package:prism/features/account/domain/entities/account.dart';
 import 'package:prism/core/common/entities/user.dart';
 
 part 'user_state.dart';
@@ -22,19 +21,4 @@ class UserCubit extends Cubit<UserState> {
       emit(UserInitialState());
     }
   }
-
-  void updateAccount(AccountEntity? account) {
-    if (account != null) {
-      emit(UserAccountLoadedState(
-        account,
-      ));
-    } else {
-      emit(UserAccountLoadingState());
-    }
-  }
-
-  void updateAppTheme(bool isDark) {
-    emit(UserAppThemeState(isDark));
-  }
-
 }

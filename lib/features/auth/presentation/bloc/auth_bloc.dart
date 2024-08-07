@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /* Project Imports */
+import 'package:prism/features/auth/domain/usecases/user_password_recover.dart';
 import 'package:prism/features/auth/domain/usecases/user_register.dart';
 import 'package:prism/features/auth/domain/usecases/current_user.dart';
 import 'package:prism/features/auth/domain/usecases/user_logout.dart';
@@ -22,6 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final UserLogin _userLogin;
   final CurrentUser _currentUser;
   final UserLogout _userLogout;
+  final UserPasswordRecover _userPasswordRecover;
   final UserCubit _userCubit;
 
   AuthBloc({
@@ -29,11 +31,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required UserLogin userLogin,
     required CurrentUser currentUser,
     required UserLogout userLogout,
+    required UserPasswordRecover userPasswordRecover,
     required UserCubit userCubit,
   })  : _userRegister = userRegister,
         _userLogin = userLogin,
         _currentUser = currentUser,
         _userLogout = userLogout,
+        _userPasswordRecover = userPasswordRecover,
         _userCubit = userCubit,
         super(AuthInitialState()) {
     on<AuthEvent>((_, emit) => emit(AuthLoadingState()));
@@ -41,6 +45,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthRegisterEvent>(_register);
     on<AuthIsLoggedInEvent>(_isLoggedIn);
     on<AuthLogoutEvent>(_logout);
+    on<AuthPasswordRecoverEvent>(_passwordRecover);
   }
 
   void _isLoggedIn(
@@ -108,6 +113,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthInitialState());
       },
     );
+  }
+
+  void _passwordRecover(
+    AuthPasswordRecoverEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    try {
+      final response = await _userPasswordRecover(PasswordRecoverParams(
+        email: event.email,
+      ));
+
+      response.fold(
+        (failure) => emit(AuthErrorState(failure.message)),
+        (_) => emit(AuthPasswordRecoverSuccessState()),
+      );
+    } catch (e) {
+      emit(AuthErrorState(e.toString()));
+    }
   }
 
   void _emitAuthSuccessState(

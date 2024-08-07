@@ -16,7 +16,7 @@ Future<void> initDependencies() async {
 
   final sharedPreferences = await SharedPreferences.getInstance();
   serviceLocator.registerLazySingleton<SharedPreferences>(
-        () => sharedPreferences,
+    () => sharedPreferences,
   );
 
   serviceLocator.registerLazySingleton(
@@ -66,6 +66,11 @@ void _initAuth() {
       ),
     )
     ..registerFactory(
+      () => UserPasswordRecover(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
       () => CurrentUser(
         serviceLocator(),
       ),
@@ -77,6 +82,7 @@ void _initAuth() {
         userRegister: serviceLocator(),
         currentUser: serviceLocator(),
         userLogout: serviceLocator(),
+        userPasswordRecover: serviceLocator(),
         userCubit: serviceLocator(),
       ),
     );
