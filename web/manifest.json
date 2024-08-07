@@ -1,0 +1,35 @@
+{
+    "name": "prism",
+    "short_name": "prism",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#0175C2",
+    "theme_color": "#0175C2",
+    "description": "Prism é um aplicativo de finanças inovador projetado para proporcionar uma visão multifacetada e detalhada do seu gerenciamento financeiro. Com uma interface intuitiva e recursos avançados, o Prism ajuda você a controlar suas despesas, planejar seu orçamento e alcançar seus objetivos financeiros com clareza e eficiência.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}

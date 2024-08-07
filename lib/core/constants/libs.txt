@@ -1,0 +1,12 @@
+flutter pub add connectivity_plus
+flutter pub add fpdart
+flutter pub add flutter_bloc
+flutter pub add firebase_core
+flutter pub add firebase_auth
+flutter pub add flutter_localization
+flutter_localizations:
+    sdk: flutter
+flutter pub add get_it
+flutter pub add cloud_firestore
+flutter pub add shared_preferences
+flutter pub add flutter_native_splash
