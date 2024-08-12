@@ -23,6 +23,10 @@ Future<void> initDependencies() async {
     () => UserCubit(),
   );
 
+  serviceLocator.registerLazySingleton(
+    () => ThemeCubit(),
+  );
+
   serviceLocator.registerFactory(
     () => Connectivity(),
   );

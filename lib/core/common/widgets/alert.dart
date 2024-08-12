@@ -76,7 +76,7 @@ class _MessageDialogState extends State<MessageDialog>
       contentPadding: const EdgeInsets.all(0),
       titlePadding: const EdgeInsets.all(0),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
       ),
       title: Container(
         height: 80,
@@ -138,7 +138,7 @@ class _MessageDialogState extends State<MessageDialog>
             style: ButtonStyle(
               shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(5),
                 ),
               ),
               overlayColor:
@@ -160,7 +160,7 @@ class _MessageDialogState extends State<MessageDialog>
             style: ButtonStyle(
               shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(5),
                 ),
               ),
               overlayColor:

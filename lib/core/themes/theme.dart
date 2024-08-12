@@ -28,6 +28,10 @@ class CustomTheme {
       ),
       side: BorderSide.none,
     ),
+    navigationBarTheme: const NavigationBarThemeData(
+      backgroundColor: Palette.primary,
+      indicatorColor: Palette.secondary,
+    ),
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.all(10),
       labelStyle: const TextStyle(
@@ -66,6 +70,10 @@ class CustomTheme {
     chipTheme: const ChipThemeData(
       backgroundColor: Palette.backgroundDark,
       side: BorderSide.none,
+    ),
+    navigationBarTheme: const NavigationBarThemeData(
+      backgroundColor: Palette.primaryDark,
+      indicatorColor: Palette.secondaryDark,
     ),
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.all(10),

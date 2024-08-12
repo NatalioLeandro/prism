@@ -4,9 +4,9 @@ import 'package:prism/features/auth/presentation/pages/password_recover.dart';
 
 /* Project Imports */
 // import 'package:prism/features/transaction/presentation/pages/create.dart';
-// import 'package:prism/features/transaction/presentation/pages/home.dart';
 import 'package:prism/features/auth/presentation/pages/register.dart';
 import 'package:prism/features/auth/presentation/pages/login.dart';
+import 'package:prism/features/home/presentation/pages/home.dart';
 import 'package:prism/core/common/widgets/splash.dart';
 
 const String splash = '/';
@@ -42,6 +42,10 @@ Route controller(RouteSettings settings) {
     //   return MaterialPageRoute(
     //     builder: (_) => const CreateTransactionPage(),
     //   );
+    case home:
+      return MaterialPageRoute(
+        builder: (_) => const HomePage(),
+      );
     default:
       return MaterialPageRoute(
         builder: (_) => const LoginPage(),

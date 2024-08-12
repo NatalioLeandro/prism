@@ -32,7 +32,7 @@ class _SplashPageState extends State<SplashPage>
         if (state is AuthSuccessState) {
           Navigator.pushNamedAndRemoveUntil(
             context,
-            routes.login,
+            routes.home,
             (route) => false,
           );
         } else if (state is AuthErrorState) {

@@ -44,9 +44,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 message: 'Cadastro efetuado com sucesso!',
                 type: AlertType.success,
                 onRedirect: () {
-                  Navigator.pushNamed(
+                  Navigator.pushNamedAndRemoveUntil(
                     context,
                     routes.home,
+                        (route) => false,
                   );
                 },
               );
