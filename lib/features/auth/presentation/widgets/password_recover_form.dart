@@ -44,8 +44,8 @@ class _PasswordRecoverForm extends State<PasswordRecoverForm> {
           ),
           const SizedBox(height: 15),
           RedirectLink(
-            text: 'Já tem uma conta?',
-            link: 'Faça login',
+            text: '',
+            link: 'voltar',
             onTap: () {
               Navigator.pushNamedAndRemoveUntil(
                 context,

@@ -102,8 +102,16 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> recover({required String email}) {
-    // TODO: implement recover
-    throw UnimplementedError();
+  Future<Either<Failure, void>> recover({required String email}) async {
+    try {
+      if (!await _connectionChecker.connected) {
+        return left(Failure(Constants.connectionError));
+      }
+      await _authRemoteDataSource.recover(email: email);
+
+      return right(null);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
   }
 }

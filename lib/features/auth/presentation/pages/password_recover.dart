@@ -37,7 +37,7 @@ class _PasswordRecoverPageState extends State<PasswordRecoverPage> {
                 type: AlertType.error,
                 onConfirm: () {},
               );
-            } else if (state is AuthSuccessState) {
+            } else if (state is AuthPasswordRecoverSuccessState) {
               showMessageDialog(
                 context,
                 title: 'Sucesso!',
@@ -46,7 +46,7 @@ class _PasswordRecoverPageState extends State<PasswordRecoverPage> {
                 onRedirect: () {
                   Navigator.pushNamedAndRemoveUntil(
                     context,
-                    routes.home,
+                    routes.login,
                         (route) => false,
                   );
                 },

@@ -18,6 +18,10 @@ abstract interface class AuthRemoteDataSource {
     required String password,
   });
 
+  Future<void> recover({
+    required String email,
+  });
+
   Future<void> logout();
 
   Future<UserModel?> getCurrentUserData();
@@ -91,6 +95,25 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> logout() async {
     await _auth.signOut();
+  }
+
+  @override
+  Future<void> recover({
+    required String email,
+  }) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        throw ServerException('E-mail inválido');
+      } else if (e.code == 'user-not-found') {
+        throw ServerException('Usuário não encontrado');
+      } else {
+        throw ServerException(e.message as String);
+      }
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
   }
 
   @override
