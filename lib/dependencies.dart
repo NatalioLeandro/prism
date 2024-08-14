@@ -12,9 +12,9 @@ import 'core/common/cubit/theme/theme_cubit.dart';
 
 /* Auth Feature Imports */
 import 'package:prism/features/auth/domain/usecases/update_user_account_type.dart';
+import 'package:prism/features/auth/domain/usecases/update_user_fixed_income.dart';
 import 'package:prism/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:prism/features/auth/domain/usecases/user_password_recover.dart';
-import 'package:prism/features/auth/domain/usecases/update_user_balance.dart';
 import 'package:prism/features/auth/domain/repositories/auth_repository.dart';
 import 'package:prism/features/auth/domain/usecases/user_register.dart';
 import 'package:prism/features/auth/domain/usecases/current_user.dart';

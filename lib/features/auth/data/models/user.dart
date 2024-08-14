@@ -11,7 +11,7 @@ class UserModel extends UserEntity {
     required super.email,
     required super.name,
     required super.photo,
-    required super.balance,
+    required super.fixedIncome,
     required super.account,
   });
 
@@ -21,7 +21,7 @@ class UserModel extends UserEntity {
       email: json['email'],
       name: json['name'],
       photo: json['photo'],
-      balance: (json['balance'] ?? 0.0).toDouble(),
+      fixedIncome: (json['fixedIncome'] ?? 0.0).toDouble(),
       account: AccountType.values.firstWhere(
             (e) => e.toString() == json['account'],
         orElse: () => AccountType.free,
@@ -35,7 +35,7 @@ class UserModel extends UserEntity {
       'email': email,
       'name': name,
       'photo': photo,
-      'balance': balance,
+      'balance': fixedIncome,
       'account': account.toString(),
     };
   }
@@ -46,7 +46,7 @@ class UserModel extends UserEntity {
       email: user.email ?? '',
       name: user.displayName ?? '',
       photo: user.photoURL ?? '',
-      balance: 0,
+      fixedIncome: 0,
       account: AccountType.free,
     );
   }
@@ -56,7 +56,7 @@ class UserModel extends UserEntity {
     String? email,
     String? name,
     String? photo,
-    double? balance,
+    double? fixedIncome,
     AccountType? account,
   }) {
     return UserModel(
@@ -64,7 +64,7 @@ class UserModel extends UserEntity {
       email: email ?? this.email,
       name: name ?? this.name,
       photo: photo ?? this.photo,
-      balance: balance ?? this.balance,
+      fixedIncome: fixedIncome ?? this.fixedIncome,
       account: account ?? this.account,
     );
   }

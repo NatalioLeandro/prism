@@ -26,14 +26,14 @@ class RedirectLink extends StatelessWidget {
           text: '$text ',
           style: TextStyle(
             color: textColor,
-            fontSize: 14,
+            fontSize: 12,
           ),
           children: [
             TextSpan(
               text: link,
               style: TextStyle(
                 color: linkColor,
-                fontSize: 14,
+                fontSize: 12,
                 decoration: TextDecoration.underline,
               ),
             ),

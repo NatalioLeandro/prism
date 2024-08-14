@@ -76,7 +76,7 @@ void _initAuth() {
       ),
     )
     ..registerFactory(
-      () => UpdateUserBalance(
+      () => UpdateUserFixedIncome(
         serviceLocator(),
       ),
     )
@@ -98,7 +98,7 @@ void _initAuth() {
         currentUser: serviceLocator(),
         userLogout: serviceLocator(),
         userPasswordRecover: serviceLocator(),
-        updateUserBalance: serviceLocator(),
+        updateUserFixedIncome: serviceLocator(),
         updateUserAccountType: serviceLocator(),
         userCubit: serviceLocator(),
       ),

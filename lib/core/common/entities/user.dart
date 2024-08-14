@@ -6,7 +6,7 @@ class UserEntity {
   final String email;
   final String name;
   final String photo;
-  final double balance;
+  final double fixedIncome;
   final AccountType account;
 
   UserEntity({
@@ -14,7 +14,7 @@ class UserEntity {
     required this.email,
     required this.name,
     required this.photo,
-    required this.balance,
+    required this.fixedIncome,
     required this.account,
   });
 }

@@ -62,13 +62,13 @@ class _HomePageState extends State<HomePage> {
     context.read<ThemeCubit>().update(newTheme);
   }
 
-  void _updateBalance() {
+  void _updateFixedIncome() {
     final userState = context.read<UserCubit>().state;
-    final newBalance = double.tryParse(_balanceController.text);
-    if (newBalance != null) {
-      context.read<AuthBloc>().add(UpdateUserBalanceEvent(
+    final newFixedIncome = double.tryParse(_balanceController.text);
+    if (newFixedIncome != null) {
+      context.read<AuthBloc>().add(UpdateUserFixedIncomeEvent(
         userId: userState.id,
-        newBalance: newBalance,
+        newFixedIncome: newFixedIncome,
       ));
     } else {
       showMessageDialog(
@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             const SizedBox(height: 10),
                             ElevatedButton(
-                              onPressed: _updateBalance,
+                              onPressed: _updateFixedIncome,
                               child: const Text('Atualizar Saldo'),
                             ),
                           ],
@@ -159,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Balances Page Content Here'),
+                    const Text('FixedIncomes Page Content Here'),
                     // widget para exibir os saldos
                     const SizedBox(height: 20),
                     Card(
@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                               builder: (context, state) {
                                 if (state is AuthSuccessState) {
                                   return Text(
-                                    '${state.user.balance}',
+                                    '${state.user.fixedIncome}',
                                     style: const TextStyle(fontSize: 14),
                                   );
                                 }

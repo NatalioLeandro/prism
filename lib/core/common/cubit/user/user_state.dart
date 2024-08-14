@@ -17,5 +17,5 @@ class UserLoggedInState extends UserState {
   String get id => user.id;
 
   @override
-  double get balance => user.balance;
+  double get balance => user.fixedIncome;
 }

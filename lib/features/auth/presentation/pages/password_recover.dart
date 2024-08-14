@@ -47,7 +47,7 @@ class _PasswordRecoverPageState extends State<PasswordRecoverPage> {
                   Navigator.pushNamedAndRemoveUntil(
                     context,
                     routes.login,
-                        (route) => false,
+                    (route) => false,
                   );
                 },
               );
@@ -61,27 +61,31 @@ class _PasswordRecoverPageState extends State<PasswordRecoverPage> {
                 ),
               );
             }
-            return Center(
+            return SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const AuthTitle(title: 'Recuperar Senha'),
-                    const PasswordRecoverForm(),
-                    const SizedBox(height: 20),
-                    RedirectLink(
-                      text: 'Não tem uma conta?',
-                      link: 'Registre-se',
-                      onTap: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          routes.register,
-                              (route) => false,
-                        );
-                      },
-                    ),
-                  ],
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const SizedBox(height: 40),
+                      const AuthTitle(title: 'Recuperar Senha'),
+                      const SizedBox(height: 40),
+                      const PasswordRecoverForm(),
+                      const SizedBox(height: 40),
+                      RedirectLink(
+                        text: 'Não tem uma conta?',
+                        link: 'Registre-se',
+                        onTap: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            routes.register,
+                            (route) => false,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

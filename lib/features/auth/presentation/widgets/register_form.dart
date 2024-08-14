@@ -49,21 +49,21 @@ class _RegisterFormState extends State<RegisterForm> {
             icon: Icons.person_outline,
             controller: _nameController,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
           CustomFormField(
             hint: 'Digite seu email',
             label: 'Email',
             icon: Icons.email_outlined,
             controller: _emailController,
           ),
-          // const SizedBox(height: 20),
+          // const SizedBox(height: 15),
           // CustomFormField(
           //   hint: 'Digite sua foto',
           //   label: 'Foto',
           //   icon: Icons.photo_outlined,
           //   controller: _photoUrlController,
           // ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
           CustomFormField(
             hint: 'Digite sua senha',
             label: 'Senha',
@@ -71,7 +71,7 @@ class _RegisterFormState extends State<RegisterForm> {
             controller: _passwordController,
             obscure: true,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
           CustomButton(
             text: 'Cadastrar',
             onPressed: () {
@@ -87,10 +87,10 @@ class _RegisterFormState extends State<RegisterForm> {
               }
             },
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           RedirectLink(
             text: 'Ao continuar, você concorda com nossos',
-            link: 'Termos de Uso',
+            link: 'termos de uso.',
             onTap: () {
               Navigator.pushNamedAndRemoveUntil(
                 context,

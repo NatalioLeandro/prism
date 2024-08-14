@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /* Project Imports */
+import 'package:prism/features/home/presentation/widgets/user_information_card.dart';
 import 'package:prism/features/home/presentation/widgets/navigation_bar.dart';
 import 'package:prism/features/home/presentation/widgets/menu_button.dart';
 import 'package:prism/features/home/presentation/widgets/app_header.dart';
@@ -96,7 +97,13 @@ class _HomePageState extends State<HomePage> {
             index: _currentIndex,
             children: const [
               Center(child: Text('Grupos')),
-              Center(child: Text('Home')),
+              Center(child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  UserInfoCard(),
+                  Text('Home'),
+                ],
+              )),
               Center(child: Text('Finanças')),
             ],
           ),

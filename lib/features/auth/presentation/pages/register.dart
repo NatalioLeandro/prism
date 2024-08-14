@@ -47,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Navigator.pushNamedAndRemoveUntil(
                     context,
                     routes.home,
-                        (route) => false,
+                    (route) => false,
                   );
                 },
               );
@@ -61,27 +61,31 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               );
             }
-            return Center(
+            return SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const AuthTitle(title: 'Cadastro'),
-                    const RegisterForm(),
-                    const SizedBox(height: 20),
-                    RedirectLink(
-                      text: 'Já tem uma conta?',
-                      link: 'Faça login',
-                      onTap: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          routes.login,
-                          (route) => false,
-                        );
-                      },
-                    ),
-                  ],
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const SizedBox(height: 40),
+                      const AuthTitle(title: 'Cadastro'),
+                      const SizedBox(height: 40),
+                      const RegisterForm(),
+                      const SizedBox(height: 40),
+                      RedirectLink(
+                        text: 'Já tem uma conta?',
+                        link: 'Faça login',
+                        onTap: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            routes.login,
+                            (route) => false,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

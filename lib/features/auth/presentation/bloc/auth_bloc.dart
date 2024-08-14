@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 /* Project Imports */
 import 'package:prism/features/auth/domain/usecases/update_user_account_type.dart';
+import 'package:prism/features/auth/domain/usecases/update_user_fixed_income.dart';
 import 'package:prism/features/auth/domain/usecases/user_password_recover.dart';
-import 'package:prism/features/auth/domain/usecases/update_user_balance.dart';
 import 'package:prism/features/auth/domain/usecases/user_register.dart';
 import 'package:prism/features/auth/domain/usecases/current_user.dart';
 import 'package:prism/features/auth/domain/usecases/user_logout.dart';
@@ -28,7 +28,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final CurrentUser _currentUser;
   final UserLogout _userLogout;
   final UserPasswordRecover _userPasswordRecover;
-  final UpdateUserBalance _updateUserBalance;
+  final UpdateUserFixedIncome _updateUserFixedIncome;
   final UpdateUserAccountType _updateUserAccountType;
   final UserCubit _userCubit;
 
@@ -38,7 +38,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required CurrentUser currentUser,
     required UserLogout userLogout,
     required UserPasswordRecover userPasswordRecover,
-    required UpdateUserBalance updateUserBalance,
+    required UpdateUserFixedIncome updateUserFixedIncome,
     required UpdateUserAccountType updateUserAccountType,
     required UserCubit userCubit,
   })  : _userRegister = userRegister,
@@ -46,7 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         _currentUser = currentUser,
         _userLogout = userLogout,
         _userPasswordRecover = userPasswordRecover,
-        _updateUserBalance = updateUserBalance,
+        _updateUserFixedIncome = updateUserFixedIncome,
         _updateUserAccountType = updateUserAccountType,
         _userCubit = userCubit,
         super(AuthInitialState()) {
@@ -56,7 +56,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthIsLoggedInEvent>(_isLoggedIn);
     on<AuthLogoutEvent>(_logout);
     on<AuthPasswordRecoverEvent>(_passwordRecover);
-    on<UpdateUserBalanceEvent>(_updateBalance);
+    on<UpdateUserFixedIncomeEvent>(_updateFixedIncome);
     on<UpdateUserAccountTypeEvent>(_updateAccountType);
   }
 
@@ -145,15 +145,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  void _updateBalance(
-      UpdateUserBalanceEvent event,
+  void _updateFixedIncome(
+      UpdateUserFixedIncomeEvent event,
       Emitter<AuthState> emit,
       ) async {
     try {
-      final response = await _updateUserBalance(
-        UpdateUserBalanceParams(
+      final response = await _updateUserFixedIncome(
+        UpdateUserFixedIncomeParams(
           userId: event.userId,
-          newBalance: event.newBalance,
+          newFixedIncome: event.newFixedIncome,
         ),
       );
 
@@ -163,7 +163,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           final currentUserResponse = await _currentUser(NoParams());
           currentUserResponse.fold(
                 (failure) => emit(AuthErrorState(failure.message)),
-                (user) => emit(AuthUpdateBalanceSuccessState(user)),
+                (user) => emit(AuthUpdateFixedIncomeSuccessState(user)),
           );
         },
       );

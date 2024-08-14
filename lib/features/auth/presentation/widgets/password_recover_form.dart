@@ -54,7 +54,7 @@ class _PasswordRecoverForm extends State<PasswordRecoverForm> {
               );
             },
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
           CustomButton(
             text: 'Enviar',
             onPressed: () {

@@ -35,13 +35,13 @@ final class AuthPasswordRecoverEvent extends AuthEvent {
   });
 }
 
-final class UpdateUserBalanceEvent extends AuthEvent {
+final class UpdateUserFixedIncomeEvent extends AuthEvent {
   final String userId;
-  final double newBalance;
+  final double newFixedIncome;
 
-  UpdateUserBalanceEvent({
+  UpdateUserFixedIncomeEvent({
     required this.userId,
-    required this.newBalance,
+    required this.newFixedIncome,
   });
 }
 

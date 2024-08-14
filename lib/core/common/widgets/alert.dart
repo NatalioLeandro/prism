@@ -80,13 +80,13 @@ class _MessageDialogState extends State<MessageDialog>
       ),
       title: Container(
         height: 80,
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(5),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: getColor().withOpacity(0.1),
+          color: getColor().withOpacity(0.07),
           borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
+            topLeft: Radius.circular(5),
+            topRight: Radius.circular(5),
           ),
         ),
         child: Text(
@@ -111,13 +111,12 @@ class _MessageDialogState extends State<MessageDialog>
                 widget.message,
                 style: const TextStyle(
                   fontSize: 14,
-                  fontFamily: 'Roboto',
                 ),
               ),
             ),
             if (widget.onRedirect != null)
               Padding(
-                padding: const EdgeInsets.only(top: 16.0),
+                padding: const EdgeInsets.only(top: 10),
                 child: AnimatedBuilder(
                   animation: _controller,
                   builder: (context, child) {

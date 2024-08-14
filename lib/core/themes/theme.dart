@@ -32,6 +32,14 @@ class CustomTheme {
       backgroundColor: Palette.primary,
       indicatorColor: Palette.secondary,
     ),
+    cardTheme: const CardTheme(
+      color: Palette.secondary,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(5),
+        ),
+      ),
+    ),
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.all(10),
       labelStyle: const TextStyle(

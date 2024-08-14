@@ -44,7 +44,7 @@ class _LoginFormState extends State<LoginForm> {
             icon: Icons.email_outlined,
             controller: _emailController,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
           CustomFormField(
             hint: 'Digite sua senha',
             label: 'Senha',
@@ -64,7 +64,7 @@ class _LoginFormState extends State<LoginForm> {
               );
             },
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
           CustomButton(
             text: 'Entrar',
             onPressed: () {

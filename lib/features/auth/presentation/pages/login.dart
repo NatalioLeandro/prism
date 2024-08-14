@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.pushNamedAndRemoveUntil(
                     context,
                     routes.home,
-                        (route) => false,
+                    (route) => false,
                   );
                 },
               );
@@ -61,27 +61,31 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               );
             }
-            return Center(
+            return SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const AuthTitle(title: 'Login'),
-                    const LoginForm(),
-                    const SizedBox(height: 20),
-                    RedirectLink(
-                      text: 'Não tem uma conta?',
-                      link: 'Registre-se',
-                      onTap: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          routes.register,
-                              (route) => false,
-                        );
-                      },
-                    ),
-                  ],
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const SizedBox(height: 40),
+                      const AuthTitle(title: 'Login'),
+                      const SizedBox(height: 40),
+                      const LoginForm(),
+                      const SizedBox(height: 40),
+                      RedirectLink(
+                        text: 'Não tem uma conta?',
+                        link: 'Registre-se',
+                        onTap: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            routes.register,
+                            (route) => false,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

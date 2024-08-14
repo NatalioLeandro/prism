@@ -5,6 +5,9 @@ ios/Runner/GoogleServices-Info.plist
 lib/firebase_options.dart
 firebase.json
 
+# Outros
+lib/features/home/presentation/pages/home-ex.dart
+
 # Miscellaneous
 *.class
 *.log

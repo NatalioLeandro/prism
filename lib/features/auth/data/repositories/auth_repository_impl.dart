@@ -117,15 +117,18 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> updateUserBalance({
+  Future<Either<Failure, void>> updateUserFixedIncome({
     required String userId,
-    required double newBalance,
+    required double newFixedIncome,
   }) async {
     try {
       if (!await _connectionChecker.connected) {
         return left(Failure(Constants.connectionError));
       }
-      await _authRemoteDataSource.updateUserBalance(userId, newBalance,);
+      await _authRemoteDataSource.updateUserFixedIncome(
+        userId,
+        newFixedIncome,
+      );
       return right(null);
     } on ServerException catch (e) {
       return left(Failure(e.message));
@@ -141,7 +144,10 @@ class AuthRepositoryImpl implements AuthRepository {
       if (!await _connectionChecker.connected) {
         return left(Failure(Constants.connectionError));
       }
-      await _authRemoteDataSource.updateUserAccountType(userId, newAccountType,);
+      await _authRemoteDataSource.updateUserAccountType(
+        userId,
+        newAccountType,
+      );
       return right(null);
     } on ServerException catch (e) {
       return left(Failure(e.message));

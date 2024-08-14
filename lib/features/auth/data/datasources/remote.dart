@@ -28,9 +28,9 @@ abstract interface class AuthRemoteDataSource {
 
   Future<UserModel?> getCurrentUserData();
 
-  Future<void> updateUserBalance(
+  Future<void> updateUserFixedIncome(
     String userId,
-    double newBalance,
+    double newFixedIncome,
   );
 
   Future<void> updateUserAccountType(
@@ -141,12 +141,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<void> updateUserBalance(
+  Future<void> updateUserFixedIncome(
     String userId,
-    double newBalance,
+    double newFixedIncome,
   ) async {
     await _firestore.collection('users').doc(userId).update({
-      'balance': newBalance,
+      'fixedIncome': newFixedIncome,
     });
   }
 
@@ -171,7 +171,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       'email': user.email,
       'name': user.displayName,
       'photo': user.photoURL,
-      'balance': 0.0,
+      'fixedIncome': 0.0,
       'account': AccountType.free.toString(),
     });
   }
