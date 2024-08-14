@@ -25,7 +25,7 @@ class _SplashPageState extends State<SplashPage>
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 2), () {
       final authBloc = BlocProvider.of<AuthBloc>(context);
       authBloc.add(AuthIsLoggedInEvent());
       _authSubscription = authBloc.stream.listen((state) {

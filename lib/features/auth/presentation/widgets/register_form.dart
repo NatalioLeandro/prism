@@ -55,6 +55,7 @@ class _RegisterFormState extends State<RegisterForm> {
             label: 'Email',
             icon: Icons.email_outlined,
             controller: _emailController,
+            autofillHints: const [AutofillHints.email],
           ),
           // const SizedBox(height: 15),
           // CustomFormField(
@@ -70,6 +71,7 @@ class _RegisterFormState extends State<RegisterForm> {
             icon: Icons.lock_outline,
             controller: _passwordController,
             obscure: true,
+            autofillHints: const [AutofillHints.password],
           ),
           const SizedBox(height: 15),
           CustomButton(
@@ -87,7 +89,7 @@ class _RegisterFormState extends State<RegisterForm> {
               }
             },
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           RedirectLink(
             text: 'Ao continuar, você concorda com nossos',
             link: 'termos de uso.',

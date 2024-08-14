@@ -12,7 +12,6 @@ import 'package:prism/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:prism/config/routes/router.dart' as routes;
 import 'package:prism/core/utils/show_dialog.dart';
 import 'package:prism/core/enums/alert_type.dart';
-import 'package:prism/core/themes/palette.dart';
 
 class PasswordRecoverPage extends StatefulWidget {
   const PasswordRecoverPage({super.key});
@@ -55,20 +54,20 @@ class _PasswordRecoverPageState extends State<PasswordRecoverPage> {
           },
           builder: (context, state) {
             if (state is AuthLoadingState) {
-              return const Center(
+              return Center(
                 child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Palette.white),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).colorScheme.onPrimary),
                 ),
               );
             }
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Center(
+            return Center(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const SizedBox(height: 40),
                       const AuthTitle(title: 'Recuperar Senha'),
                       const SizedBox(height: 40),
                       const PasswordRecoverForm(),

@@ -9,6 +9,7 @@ class CustomFormField extends StatelessWidget {
   final TextEditingController controller;
   final bool obscure;
   final String? Function(String?)? validator;
+  final List<String> autofillHints;
 
   const CustomFormField({
     super.key,
@@ -18,6 +19,7 @@ class CustomFormField extends StatelessWidget {
     required this.controller,
     this.obscure = false,
     this.validator,
+    this.autofillHints = const [],
   });
 
   @override
@@ -25,6 +27,7 @@ class CustomFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: obscure,
+      autofillHints: autofillHints,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(15),
         hintText: hint,

@@ -43,6 +43,7 @@ class _LoginFormState extends State<LoginForm> {
             label: 'Email',
             icon: Icons.email_outlined,
             controller: _emailController,
+            autofillHints: const [AutofillHints.email],
           ),
           const SizedBox(height: 15),
           CustomFormField(
@@ -51,6 +52,7 @@ class _LoginFormState extends State<LoginForm> {
             icon: Icons.lock_outline,
             controller: _passwordController,
             obscure: true,
+            autofillHints: const [AutofillHints.password],
           ),
           const SizedBox(height: 15),
           RedirectLink(

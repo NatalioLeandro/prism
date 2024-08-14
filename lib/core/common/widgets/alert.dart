@@ -83,7 +83,7 @@ class _MessageDialogState extends State<MessageDialog>
         padding: const EdgeInsets.all(5),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: getColor().withOpacity(0.07),
+          color: Theme.of(context).colorScheme.onPrimary,
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(5),
             topRight: Radius.circular(5),
@@ -93,24 +93,26 @@ class _MessageDialogState extends State<MessageDialog>
           widget.title,
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: getColor(),
-            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
       ),
       content: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: 80,
+              height: 50,
               alignment: Alignment.center,
-              child: Text(
-                widget.message,
-                style: const TextStyle(
-                  fontSize: 14,
+              child: SingleChildScrollView(
+                child: Text(
+                  widget.message,
+                  style: const TextStyle(
+                    fontSize: 14,
+                  ),
                 ),
               ),
             ),
@@ -123,7 +125,7 @@ class _MessageDialogState extends State<MessageDialog>
                     return LinearProgressIndicator(
                       value: _controller.value,
                       valueColor: AlwaysStoppedAnimation(getColor()),
-                      backgroundColor: getColor().withOpacity(0.1),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                     );
                   },
                 ),
@@ -141,7 +143,7 @@ class _MessageDialogState extends State<MessageDialog>
                 ),
               ),
               overlayColor:
-              WidgetStateProperty.all(getColor().withOpacity(0.1)),
+                  WidgetStateProperty.all(getColor().withOpacity(0.1)),
             ),
             onPressed: () {
               if (Navigator.canPop(context)) {
@@ -151,7 +153,9 @@ class _MessageDialogState extends State<MessageDialog>
             },
             child: Text(
               'Confirmar',
-              style: TextStyle(color: getColor()),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
             ),
           ),
         if (widget.onDismiss != null)
@@ -163,7 +167,7 @@ class _MessageDialogState extends State<MessageDialog>
                 ),
               ),
               overlayColor:
-              WidgetStateProperty.all(getColor().withOpacity(0.1)),
+                  WidgetStateProperty.all(getColor().withOpacity(0.1)),
             ),
             onPressed: () {
               if (Navigator.canPop(context)) {
@@ -173,7 +177,9 @@ class _MessageDialogState extends State<MessageDialog>
             },
             child: Text(
               'Cancelar',
-              style: TextStyle(color: getColor()),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
             ),
           ),
       ],
