@@ -47,6 +47,7 @@ dependencies:
   cloud_firestore: ^4.14.0
   shared_preferences: ^2.3.1
   flutter_native_splash: ^2.4.1
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,24 @@ flutter_native_splash:
 
   web: false
 
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/logo-dark.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/icons/logo-dark.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/icons/logo-dark.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/icons/logo-dark.png"
+
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -83,7 +102,8 @@ flutter:
   assets:
     - assets/icons/hurricane-logo-black.png
     - assets/icons/hurricane-logo-white.png
-    - assets/logo.png
+    - assets/icons/logo-dark.png
+    - assets/icons/logo-light.png
 
   fonts:
     - family: Montserrat

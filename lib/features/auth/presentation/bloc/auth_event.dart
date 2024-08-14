@@ -35,6 +35,26 @@ final class AuthPasswordRecoverEvent extends AuthEvent {
   });
 }
 
+final class UpdateUserBalanceEvent extends AuthEvent {
+  final String userId;
+  final double newBalance;
+
+  UpdateUserBalanceEvent({
+    required this.userId,
+    required this.newBalance,
+  });
+}
+
+final class UpdateUserAccountTypeEvent extends AuthEvent {
+  final String userId;
+  final AccountType newAccountType;
+
+  UpdateUserAccountTypeEvent({
+    required this.userId,
+    required this.newAccountType,
+  });
+}
+
 final class AuthIsLoggedInEvent extends AuthEvent {}
 
 final class AuthLogoutEvent extends AuthEvent {}

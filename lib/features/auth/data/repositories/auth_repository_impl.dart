@@ -7,6 +7,7 @@ import 'package:prism/features/auth/data/datasources/remote.dart';
 import 'package:prism/core/network/connection_checker.dart';
 import 'package:prism/core/common/entities/user.dart';
 import 'package:prism/core/constants/constants.dart';
+import 'package:prism/core/enums/account_type.dart';
 import 'package:prism/core/errors/exceptions.dart';
 import 'package:prism/core/errors/failures.dart';
 
@@ -109,6 +110,38 @@ class AuthRepositoryImpl implements AuthRepository {
       }
       await _authRemoteDataSource.recover(email: email);
 
+      return right(null);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateUserBalance({
+    required String userId,
+    required double newBalance,
+  }) async {
+    try {
+      if (!await _connectionChecker.connected) {
+        return left(Failure(Constants.connectionError));
+      }
+      await _authRemoteDataSource.updateUserBalance(userId, newBalance,);
+      return right(null);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateUserAccountType({
+    required String userId,
+    required AccountType newAccountType,
+  }) async {
+    try {
+      if (!await _connectionChecker.connected) {
+        return left(Failure(Constants.connectionError));
+      }
+      await _authRemoteDataSource.updateUserAccountType(userId, newAccountType,);
       return right(null);
     } on ServerException catch (e) {
       return left(Failure(e.message));

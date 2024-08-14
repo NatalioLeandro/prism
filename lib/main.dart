@@ -30,9 +30,6 @@ void main() async {
         BlocProvider(
           create: (context) => serviceLocator<AuthBloc>(),
         ),
-        // BlocProvider(
-        //   create: (context) => serviceLocator<TransactionBloc>(),
-        // ),
         BlocProvider(
           create: (context) => serviceLocator<ThemeCubit>(),
         ),

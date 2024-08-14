@@ -1,8 +1,10 @@
 /* Package Imports */
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 /* Project Imports */
 import 'package:prism/features/auth/data/models/user.dart';
+import 'package:prism/core/enums/account_type.dart';
 import 'package:prism/core/errors/exceptions.dart';
 
 abstract interface class AuthRemoteDataSource {
@@ -25,12 +27,23 @@ abstract interface class AuthRemoteDataSource {
   Future<void> logout();
 
   Future<UserModel?> getCurrentUserData();
+
+  Future<void> updateUserBalance(
+    String userId,
+    double newBalance,
+  );
+
+  Future<void> updateUserAccountType(
+    String userId,
+    AccountType newAccountType,
+  );
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final FirebaseAuth _auth;
+  final FirebaseFirestore _firestore;
 
-  AuthRemoteDataSourceImpl(this._auth);
+  AuthRemoteDataSourceImpl(this._auth, this._firestore);
 
   @override
   Future<UserModel> login({
@@ -43,7 +56,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         password: password,
       );
 
-      return UserModel.fromFirebaseUser(userCredential.user!);
+      return _getUserModelFromFirestore(userCredential.user!);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
         throw ServerException('E-mail inválido');
@@ -76,7 +89,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       await userCredential.user!.reload();
       final updatedUser = _auth.currentUser;
 
-      return UserModel.fromFirebaseUser(updatedUser!);
+      await _createUserDocument(updatedUser!);
+
+      return _getUserModelFromFirestore(updatedUser);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         throw ServerException('E-mail já em uso');
@@ -120,8 +135,44 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<UserModel?> getCurrentUserData() async {
     final user = _auth.currentUser;
     if (user != null) {
-      return UserModel.fromFirebaseUser(user);
+      return _getUserModelFromFirestore(user);
     }
     return null;
+  }
+
+  @override
+  Future<void> updateUserBalance(
+    String userId,
+    double newBalance,
+  ) async {
+    await _firestore.collection('users').doc(userId).update({
+      'balance': newBalance,
+    });
+  }
+
+  @override
+  Future<void> updateUserAccountType(
+    String userId,
+    AccountType newAccountType,
+  ) async {
+    await _firestore.collection('users').doc(userId).update({
+      'account': newAccountType.toString(),
+    });
+  }
+
+  Future<UserModel> _getUserModelFromFirestore(User user) async {
+    final doc = await _firestore.collection('users').doc(user.uid).get();
+    return UserModel.fromJson(doc.data()!);
+  }
+
+  Future<void> _createUserDocument(User user) async {
+    await _firestore.collection('users').doc(user.uid).set({
+      'id': user.uid,
+      'email': user.email,
+      'name': user.displayName,
+      'photo': user.photoURL,
+      'balance': 0.0,
+      'account': AccountType.free.toString(),
+    });
   }
 }

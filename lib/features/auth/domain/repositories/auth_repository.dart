@@ -3,6 +3,7 @@ import 'package:fpdart/fpdart.dart';
 
 /* Project Imports */
 import 'package:prism/core/common/entities/user.dart';
+import 'package:prism/core/enums/account_type.dart';
 import 'package:prism/core/errors/failures.dart';
 
 abstract interface class AuthRepository {
@@ -25,4 +26,14 @@ abstract interface class AuthRepository {
   Future<Either<Failure, void>> logout();
 
   Future<Either<Failure, UserEntity>> getCurrentUser();
+
+  Future<Either<Failure, void>> updateUserBalance({
+    required String userId,
+    required double newBalance,
+  });
+
+  Future<Either<Failure, void>> updateUserAccountType({
+    required String userId,
+    required AccountType newAccountType,
+  });
 }

@@ -21,4 +21,16 @@ final class AuthSuccessState extends AuthState {
   const AuthSuccessState(this.user);
 }
 
+final class AuthUpdateBalanceSuccessState extends AuthState {
+  final UserEntity user;
+
+  const AuthUpdateBalanceSuccessState(this.user);
+}
+
+final class AuthUpdateAccountTypeSuccessState extends AuthState {
+  final UserEntity user;
+
+  const AuthUpdateAccountTypeSuccessState(this.user);
+}
+
 final class AuthPasswordRecoverSuccessState extends AuthState {}

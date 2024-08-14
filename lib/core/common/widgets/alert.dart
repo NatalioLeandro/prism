@@ -105,12 +105,12 @@ class _MessageDialogState extends State<MessageDialog>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: 60,
+              height: 80,
               alignment: Alignment.center,
               child: Text(
                 widget.message,
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   fontFamily: 'Roboto',
                 ),
               ),

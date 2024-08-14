@@ -44,6 +44,7 @@ void _initAuth() {
     ..registerFactory<AuthRemoteDataSource>(
       () => AuthRemoteDataSourceImpl(
         serviceLocator(),
+        serviceLocator(),
       ),
     )
     // Repositories
@@ -75,6 +76,16 @@ void _initAuth() {
       ),
     )
     ..registerFactory(
+      () => UpdateUserBalance(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => UpdateUserAccountType(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
       () => CurrentUser(
         serviceLocator(),
       ),
@@ -87,6 +98,8 @@ void _initAuth() {
         currentUser: serviceLocator(),
         userLogout: serviceLocator(),
         userPasswordRecover: serviceLocator(),
+        updateUserBalance: serviceLocator(),
+        updateUserAccountType: serviceLocator(),
         userCubit: serviceLocator(),
       ),
     );

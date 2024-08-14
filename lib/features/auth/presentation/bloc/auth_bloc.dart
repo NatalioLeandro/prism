@@ -4,14 +4,18 @@ import 'package:flutter/material.dart';
 /* Package Imports */
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
 /* Project Imports */
+import 'package:prism/features/auth/domain/usecases/update_user_account_type.dart';
 import 'package:prism/features/auth/domain/usecases/user_password_recover.dart';
+import 'package:prism/features/auth/domain/usecases/update_user_balance.dart';
 import 'package:prism/features/auth/domain/usecases/user_register.dart';
 import 'package:prism/features/auth/domain/usecases/current_user.dart';
 import 'package:prism/features/auth/domain/usecases/user_logout.dart';
 import 'package:prism/features/auth/domain/usecases/user_login.dart';
 import 'package:prism/core/common/cubit/user/user_cubit.dart';
 import 'package:prism/core/common/entities/user.dart';
+import 'package:prism/core/enums/account_type.dart';
 import 'package:prism/core/usecase/usecase.dart';
 
 part 'auth_event.dart';
@@ -24,6 +28,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final CurrentUser _currentUser;
   final UserLogout _userLogout;
   final UserPasswordRecover _userPasswordRecover;
+  final UpdateUserBalance _updateUserBalance;
+  final UpdateUserAccountType _updateUserAccountType;
   final UserCubit _userCubit;
 
   AuthBloc({
@@ -32,12 +38,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required CurrentUser currentUser,
     required UserLogout userLogout,
     required UserPasswordRecover userPasswordRecover,
+    required UpdateUserBalance updateUserBalance,
+    required UpdateUserAccountType updateUserAccountType,
     required UserCubit userCubit,
   })  : _userRegister = userRegister,
         _userLogin = userLogin,
         _currentUser = currentUser,
         _userLogout = userLogout,
         _userPasswordRecover = userPasswordRecover,
+        _updateUserBalance = updateUserBalance,
+        _updateUserAccountType = updateUserAccountType,
         _userCubit = userCubit,
         super(AuthInitialState()) {
     on<AuthEvent>((_, emit) => emit(AuthLoadingState()));
@@ -46,6 +56,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthIsLoggedInEvent>(_isLoggedIn);
     on<AuthLogoutEvent>(_logout);
     on<AuthPasswordRecoverEvent>(_passwordRecover);
+    on<UpdateUserBalanceEvent>(_updateBalance);
+    on<UpdateUserAccountTypeEvent>(_updateAccountType);
   }
 
   void _isLoggedIn(
@@ -127,6 +139,60 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       response.fold(
         (failure) => emit(AuthErrorState(failure.message)),
         (_) => emit(AuthPasswordRecoverSuccessState()),
+      );
+    } catch (e) {
+      emit(AuthErrorState(e.toString()));
+    }
+  }
+
+  void _updateBalance(
+      UpdateUserBalanceEvent event,
+      Emitter<AuthState> emit,
+      ) async {
+    try {
+      final response = await _updateUserBalance(
+        UpdateUserBalanceParams(
+          userId: event.userId,
+          newBalance: event.newBalance,
+        ),
+      );
+
+      response.fold(
+            (failure) => emit(AuthErrorState(failure.message)),
+            (_) async {
+          final currentUserResponse = await _currentUser(NoParams());
+          currentUserResponse.fold(
+                (failure) => emit(AuthErrorState(failure.message)),
+                (user) => emit(AuthUpdateBalanceSuccessState(user)),
+          );
+        },
+      );
+    } catch (e) {
+      emit(AuthErrorState(e.toString()));
+    }
+  }
+
+  void _updateAccountType(
+      UpdateUserAccountTypeEvent event,
+      Emitter<AuthState> emit,
+      ) async {
+    try {
+      final response = await _updateUserAccountType(
+        UpdateUserAccountTypeParams(
+          userId: event.userId,
+          newAccountType: event.newAccountType,
+        ),
+      );
+
+      response.fold(
+            (failure) => emit(AuthErrorState(failure.message)),
+            (_) async {
+          final currentUserResponse = await _currentUser(NoParams());
+          currentUserResponse.fold(
+                (failure) => emit(AuthErrorState(failure.message)),
+                (user) => emit(AuthUpdateAccountTypeSuccessState(user)),
+          );
+        },
       );
     } catch (e) {
       emit(AuthErrorState(e.toString()));
