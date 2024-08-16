@@ -33,10 +33,10 @@ class CustomTheme {
       indicatorColor: Palette.secondary,
     ),
     cardTheme: const CardTheme(
-      color: Palette.secondary,
+      color: Palette.primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(5),
+          Radius.circular(10),
         ),
       ),
     ),
@@ -82,6 +82,14 @@ class CustomTheme {
     navigationBarTheme: const NavigationBarThemeData(
       backgroundColor: Palette.primaryDark,
       indicatorColor: Palette.secondaryDark,
+    ),
+    cardTheme: const CardTheme(
+      color: Palette.primaryDark,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.all(10),

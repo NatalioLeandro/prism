@@ -86,22 +86,6 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  Future<Either<Failure, UserEntity>> _getUserEntity(
-    Future<UserEntity> Function() getUser,
-  ) async {
-    try {
-      if (!await _connectionChecker.connected) {
-        return left(Failure(Constants.connectionError));
-      }
-
-      final user = await getUser();
-
-      return right(user);
-    } on ServerException catch (e) {
-      return left(Failure(e.message));
-    }
-  }
-
   @override
   Future<Either<Failure, void>> recover({required String email}) async {
     try {
@@ -117,38 +101,42 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> updateUserFixedIncome({
+  Future<Either<Failure, UserEntity>> updateUserFixedIncome({
     required String userId,
     required double newFixedIncome,
   }) async {
-    try {
-      if (!await _connectionChecker.connected) {
-        return left(Failure(Constants.connectionError));
-      }
-      await _authRemoteDataSource.updateUserFixedIncome(
+    return _getUserEntity(
+      () async => await _authRemoteDataSource.updateUserFixedIncome(
         userId,
         newFixedIncome,
-      );
-      return right(null);
-    } on ServerException catch (e) {
-      return left(Failure(e.message));
-    }
+      ),
+    );
   }
 
   @override
-  Future<Either<Failure, void>> updateUserAccountType({
+  Future<Either<Failure, UserEntity>> updateUserAccountType({
     required String userId,
     required AccountType newAccountType,
   }) async {
+    return _getUserEntity(
+      () async => await _authRemoteDataSource.updateUserAccountType(
+        userId,
+        newAccountType,
+      ),
+    );
+  }
+
+  Future<Either<Failure, UserEntity>> _getUserEntity(
+      Future<UserEntity> Function() getUser,
+      ) async {
     try {
       if (!await _connectionChecker.connected) {
         return left(Failure(Constants.connectionError));
       }
-      await _authRemoteDataSource.updateUserAccountType(
-        userId,
-        newAccountType,
-      );
-      return right(null);
+
+      final user = await getUser();
+
+      return right(user);
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }

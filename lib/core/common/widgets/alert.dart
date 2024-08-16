@@ -41,12 +41,10 @@ class _MessageDialogState extends State<MessageDialog>
 
     if (widget.onRedirect != null) {
       _controller.addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          if (Navigator.canPop(context)) {
-            Navigator.pop(context);
-          }
-          widget.onRedirect!();
+        if (Navigator.canPop(context)) {
+          Navigator.pop(context);
         }
+        widget.onRedirect!();
       });
     }
   }
@@ -73,65 +71,36 @@ class _MessageDialogState extends State<MessageDialog>
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: const EdgeInsets.all(0),
-      titlePadding: const EdgeInsets.all(0),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(20),
       ),
-      title: Container(
-        height: 80,
-        padding: const EdgeInsets.all(5),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      title: Text(
+        widget.title.toUpperCase(),
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
           color: Theme.of(context).colorScheme.onPrimary,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(5),
-            topRight: Radius.circular(5),
-          ),
-        ),
-        child: Text(
-          widget.title,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 18,
-            color: Theme.of(context).colorScheme.primary,
-          ),
         ),
       ),
-      content: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 50,
-              alignment: Alignment.center,
-              child: SingleChildScrollView(
-                child: Text(
-                  widget.message,
-                  style: const TextStyle(
-                    fontSize: 14,
-                  ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            height: 80,
+            alignment: Alignment.center,
+            child: SingleChildScrollView(
+              child: Text(
+                widget.message,
+                style: const TextStyle(
+                  fontSize: 14,
                 ),
               ),
             ),
-            if (widget.onRedirect != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: AnimatedBuilder(
-                  animation: _controller,
-                  builder: (context, child) {
-                    return LinearProgressIndicator(
-                      value: _controller.value,
-                      valueColor: AlwaysStoppedAnimation(getColor()),
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                    );
-                  },
-                ),
-              ),
-          ],
-        ),
+          ),
+        ],
       ),
       actions: [
         if (widget.onConfirm != null)

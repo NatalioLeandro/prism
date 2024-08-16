@@ -27,12 +27,12 @@ abstract interface class AuthRepository {
 
   Future<Either<Failure, UserEntity>> getCurrentUser();
 
-  Future<Either<Failure, void>> updateUserFixedIncome({
+  Future<Either<Failure, UserEntity>> updateUserFixedIncome({
     required String userId,
     required double newFixedIncome,
   });
 
-  Future<Either<Failure, void>> updateUserAccountType({
+  Future<Either<Failure, UserEntity>> updateUserAccountType({
     required String userId,
     required AccountType newAccountType,
   });

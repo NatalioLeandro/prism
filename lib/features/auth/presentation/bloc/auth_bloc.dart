@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 /* Package Imports */
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 /* Project Imports */
 import 'package:prism/features/auth/domain/usecases/update_user_account_type.dart';
 import 'package:prism/features/auth/domain/usecases/update_user_fixed_income.dart';
@@ -146,9 +145,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   void _updateFixedIncome(
-      UpdateUserFixedIncomeEvent event,
-      Emitter<AuthState> emit,
-      ) async {
+    UpdateUserFixedIncomeEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     try {
       final response = await _updateUserFixedIncome(
         UpdateUserFixedIncomeParams(
@@ -158,14 +157,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
 
       response.fold(
-            (failure) => emit(AuthErrorState(failure.message)),
-            (_) async {
-          final currentUserResponse = await _currentUser(NoParams());
-          currentUserResponse.fold(
-                (failure) => emit(AuthErrorState(failure.message)),
-                (user) => emit(AuthUpdateFixedIncomeSuccessState(user)),
-          );
-        },
+        (failure) => emit(AuthErrorState(failure.message)),
+        (user) => emit(AuthUpdateFixedIncomeSuccessState(user)),
       );
     } catch (e) {
       emit(AuthErrorState(e.toString()));
@@ -173,9 +166,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   void _updateAccountType(
-      UpdateUserAccountTypeEvent event,
-      Emitter<AuthState> emit,
-      ) async {
+    UpdateUserAccountTypeEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     try {
       final response = await _updateUserAccountType(
         UpdateUserAccountTypeParams(
@@ -185,14 +178,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
 
       response.fold(
-            (failure) => emit(AuthErrorState(failure.message)),
-            (_) async {
-          final currentUserResponse = await _currentUser(NoParams());
-          currentUserResponse.fold(
-                (failure) => emit(AuthErrorState(failure.message)),
-                (user) => emit(AuthUpdateAccountTypeSuccessState(user)),
-          );
-        },
+        (failure) => emit(AuthErrorState(failure.message)),
+        (user) => emit(AuthUpdateAccountTypeSuccessState(user)),
       );
     } catch (e) {
       emit(AuthErrorState(e.toString()));

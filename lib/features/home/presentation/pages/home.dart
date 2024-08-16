@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   void _showLogoutConfirmation(BuildContext context) {
     showMessageDialog(
       context,
-      title: 'Confirmação de Logout',
+      title: 'Confirmação de Saída',
       message: 'Você tem certeza que deseja sair?',
       type: AlertType.warning,
       onConfirm: () {
@@ -65,52 +65,53 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const AppHeader(),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(10),
-            ),
+      appBar: AppBar(
+        title: const AppHeader(),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(10),
           ),
-          actions: [
-            MenuButton(
-                onLogout: () => _showLogoutConfirmation(context),
-                onThemeSwitch: _switchTheme),
-          ],
-          toolbarHeight: 80,
         ),
-        body: BlocListener<AuthBloc, AuthState>(
-          listener: (context, state) {
-            if (state is AuthInitialState) {
-              Navigator.pushReplacementNamed(context, routes.login);
-            } else if (state is AuthErrorState) {
-              showMessageDialog(
-                context,
-                title: 'Ops...',
-                message: state.message,
-                type: AlertType.error,
-                onConfirm: () {},
-              );
-            }
-          },
-          child: IndexedStack(
-            index: _currentIndex,
-            children: const [
-              Center(child: Text('Grupos')),
-              Center(child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+        actions: [
+          MenuButton(
+              onLogout: () => _showLogoutConfirmation(context),
+              onThemeSwitch: _switchTheme),
+        ],
+        toolbarHeight: 80,
+      ),
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthInitialState) {
+            Navigator.pushReplacementNamed(context, routes.login);
+          } else if (state is AuthErrorState) {
+            showMessageDialog(
+              context,
+              title: 'Ops...',
+              message: state.message,
+              type: AlertType.error,
+              onConfirm: () {},
+            );
+          }
+        },
+        child: IndexedStack(
+          index: _currentIndex,
+          children: const [
+            Center(child: Text('Grupos')),
+            Center(
+              child: Column(
                 children: [
                   UserInfoCard(),
-                  Text('Home'),
                 ],
-              )),
-              Center(child: Text('Finanças')),
-            ],
-          ),
+              ),
+            ),
+            Center(child: Text('Finanças')),
+          ],
         ),
-        bottomNavigationBar: CustomNavigationBar(
-          onDestinationSelected: _onTabTapped,
-          selectedIndex: _currentIndex,
-        ));
+      ),
+      bottomNavigationBar: CustomNavigationBar(
+        onDestinationSelected: _onTabTapped,
+        selectedIndex: _currentIndex,
+      ),
+    );
   }
 }

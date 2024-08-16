@@ -16,6 +16,10 @@ class MenuButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: PopupMenuButton<String>(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        color: Theme.of(context).scaffoldBackgroundColor,
         icon: const Icon(Icons.more_vert_outlined),
         onSelected: (value) {
           if (value == 'logout') {
@@ -29,7 +33,10 @@ class MenuButton extends StatelessWidget {
             value: 'logout',
             child: Row(
               children: [
-                Icon(Icons.exit_to_app_outlined),
+                Icon(
+                  Icons.exit_to_app_outlined,
+                  size: 20,
+                ),
                 SizedBox(width: 8),
                 Text('Logout'),
               ],
@@ -39,7 +46,10 @@ class MenuButton extends StatelessWidget {
             value: 'theme',
             child: Row(
               children: [
-                Icon(Icons.brightness_6_outlined),
+                Icon(
+                  Icons.brightness_6_outlined,
+                  size: 20,
+                ),
                 SizedBox(width: 8),
                 Text('Alternar Tema'),
               ],

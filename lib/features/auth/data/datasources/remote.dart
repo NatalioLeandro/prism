@@ -28,12 +28,12 @@ abstract interface class AuthRemoteDataSource {
 
   Future<UserModel?> getCurrentUserData();
 
-  Future<void> updateUserFixedIncome(
+  Future<UserModel> updateUserFixedIncome(
     String userId,
     double newFixedIncome,
   );
 
-  Future<void> updateUserAccountType(
+  Future<UserModel> updateUserAccountType(
     String userId,
     AccountType newAccountType,
   );
@@ -63,10 +63,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       } else if (e.code == 'invalid-credential') {
         throw ServerException('Credenciais inválidas');
       } else {
-        throw ServerException(e.message as String);
+        throw ServerException('$e erro desconhecido ${e.code}');
       }
     } catch (e) {
-      throw ServerException(e.toString());
+      throw ServerException('$e erro desconhecido');
     }
   }
 
@@ -141,23 +141,33 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<void> updateUserFixedIncome(
+  Future<UserModel> updateUserFixedIncome(
     String userId,
     double newFixedIncome,
   ) async {
-    await _firestore.collection('users').doc(userId).update({
-      'fixedIncome': newFixedIncome,
-    });
+    try {
+      await _firestore.collection('users').doc(userId).update({
+        'fixedIncome': newFixedIncome,
+      });
+      return _getUserModelFromFirestore(_auth.currentUser!);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
   }
 
   @override
-  Future<void> updateUserAccountType(
+  Future<UserModel> updateUserAccountType(
     String userId,
     AccountType newAccountType,
   ) async {
-    await _firestore.collection('users').doc(userId).update({
-      'account': newAccountType.toString(),
-    });
+    try {
+      await _firestore.collection('users').doc(userId).update({
+        'account': newAccountType.toString(),
+      });
+      return _getUserModelFromFirestore(_auth.currentUser!);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
   }
 
   Future<UserModel> _getUserModelFromFirestore(User user) async {

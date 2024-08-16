@@ -6,10 +6,11 @@ class Palette {
   static const Color secondary = Color(0xFF006400);
   static const Color background = Color(0xFFF2F2F0);
 
-  static const Color primaryDark = Color(0xFF00171F);
+  // 00171F, 0D0D0D, 171719
+  static const Color primaryDark = Color(0xFF171719);
   static const Color secondaryDark = Color(0xFF006400);
-  // 111B21, 1A2530
-  static const Color backgroundDark = Color(0xFF111B21);
+  // 111B21, 1A2530, 2F2F2F, 010101
+  static const Color backgroundDark = Color(0xFF010101);
 
   static const Map<int, Color> gradient = {
     1: Color(0xFF004B23),

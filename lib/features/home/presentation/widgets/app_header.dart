@@ -5,10 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /* Project Imports */
-import 'package:prism/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:prism/core/common/cubit/user/user_cubit.dart';
 
-class AppHeader extends StatelessWidget {
+class AppHeader extends StatefulWidget {
   const AppHeader({super.key});
+
+  @override
+  State<AppHeader> createState() => _AppHeaderState();
+}
+
+class _AppHeaderState extends State<AppHeader> {
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +31,23 @@ class AppHeader extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 5),
-          BlocBuilder<AuthBloc, AuthState>(
+          BlocBuilder<UserCubit, UserState>(
             builder: (context, state) {
-              if (state is AuthSuccessState) {
+              if (state is UserLoggedInState) {
                 return Text(
                   'Olá, ${state.user.name}',
-                  style: const TextStyle(fontSize: 14),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 );
               }
-              return const SizedBox.shrink();
+              return const SizedBox();
             },
           ),
         ],
       ),
     );
   }
+
 }
