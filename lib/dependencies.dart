@@ -25,8 +25,8 @@ import 'package:prism/features/auth/data/datasources/remote.dart';
 
 
 /* Transaction Feature Imports */
-// import 'package:prism/features/finance/data/repositories/finance_repository_impl.dart';
-// import 'package:prism/features/finance/domain/repositories/finance_repository.dart';
+// import 'package:prism/features/finance/data/repositories/expense_repository_impl.dart';
+// import 'package:prism/features/finance/domain/repositories/expense_repository.dart';
 // import 'package:prism/features/finance/domain/usecases/create_finance.dart';
 // import 'package:prism/features/finance/presentation/bloc/finance_bloc.dart';
 // import 'package:prism/features/finance/domain/usecases/delete_finance.dart';

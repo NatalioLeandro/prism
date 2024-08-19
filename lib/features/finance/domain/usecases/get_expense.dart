@@ -1,3 +1,4 @@
+/* Package Imports */
 import 'package:fpdart/fpdart.dart';
 
 /* Project Imports */
@@ -6,23 +7,26 @@ import 'package:prism/features/finance/domain/entities/expense.dart';
 import 'package:prism/core/errors/failures.dart';
 import 'package:prism/core/usecase/usecase.dart';
 
-class GetExpenses implements UseCase<List<ExpenseEntity>, GetExpensesParams> {
+class GetExpense implements UseCase<ExpenseEntity, GetExpenseParams> {
   final ExpenseRepository _expenseRepository;
 
-  GetExpenses(this._expenseRepository);
+  GetExpense(this._expenseRepository);
 
   @override
-  Future<Either<Failure, List<ExpenseEntity>>> call(GetExpensesParams params) async {
-    return await _expenseRepository.getExpenses(
+  Future<Either<Failure, ExpenseEntity>> call(GetExpenseParams params) async {
+    return await _expenseRepository.getExpense(
       userId: params.userId,
+      id: params.id,
     );
   }
 }
 
-class GetExpensesParams {
+class GetExpenseParams {
   final String userId;
+  final String id;
 
-  GetExpensesParams({
+  GetExpenseParams({
     required this.userId,
+    required this.id,
   });
 }
