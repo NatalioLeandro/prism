@@ -4,7 +4,7 @@ final serviceLocator = GetIt.instance;
 
 Future<void> initDependencies() async {
   _initAuth();
-  // _initTransaction();
+  _initFinances();
 
   serviceLocator.registerLazySingleton(
     () => FirebaseAuth.instance,
@@ -105,61 +105,55 @@ void _initAuth() {
     );
 }
 
-// void _initTransaction() {
-//   // Data sources
-//   serviceLocator
-//     ..registerFactory<TransactionRemoteDataSource>(
-//       () => TransactionRemoteDataSourceImpl(
-//         serviceLocator(),
-//       ),
-//     )
-//     ..registerFactory<TransactionLocalDataSource>(
-//       () => TransactionLocalDataSourceImpl(
-//         serviceLocator(),
-//       ),
-//     )
-//     // Repositories
-//     ..registerFactory<TransactionRepository>(
-//       () => TransactionRepositoryImpl(
-//         serviceLocator(),
-//         serviceLocator(),
-//         serviceLocator(),
-//       ),
-//     )
-//     // Use cases
-//     ..registerFactory(
-//       () => CreateTransaction(
-//         serviceLocator(),
-//       ),
-//     )
-//     ..registerFactory(
-//       () => GetTransactions(
-//         serviceLocator(),
-//       ),
-//     )
-//     ..registerFactory(
-//       () => GetTransaction(
-//         serviceLocator(),
-//       ),
-//     )
-//     ..registerFactory(
-//       () => UpdateTransaction(
-//         serviceLocator(),
-//       ),
-//     )
-//     ..registerFactory(
-//       () => DeleteTransaction(
-//         serviceLocator(),
-//       ),
-//     )
-//     // Bloc
-//     ..registerLazySingleton(
-//       () => TransactionBloc(
-//         createTransaction: serviceLocator(),
-//         getTransactions: serviceLocator(),
-//         getTransaction: serviceLocator(),
-//         updateTransaction: serviceLocator(),
-//         deleteTransaction: serviceLocator(),
-//       ),
-//     );
-// }
+void _initFinances() {
+  // Data sources
+  serviceLocator
+    ..registerFactory<ExpenseRemoteDataSource>(
+      () => ExpenseRemoteDataSourceImpl(
+        serviceLocator(),
+      ),
+    )
+    // Repositories
+    ..registerFactory<ExpenseRepository>(
+      () => ExpenseRepositoryImpl(
+        serviceLocator(),
+        serviceLocator(),
+      ),
+    )
+    // Use cases
+    ..registerFactory(
+      () => CreateExpense(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => UpdateExpense(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => RemoveExpense(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetExpenses(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetExpense(
+        serviceLocator(),
+      )
+    )
+    // Bloc
+    ..registerLazySingleton(
+      () => FinanceBloc(
+        createExpense: serviceLocator(),
+        updateExpense: serviceLocator(),
+        removeExpense: serviceLocator(),
+        getExpenses: serviceLocator(),
+        getExpense: serviceLocator(),
+      ),
+    );
+}

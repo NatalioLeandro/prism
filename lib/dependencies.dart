@@ -25,15 +25,15 @@ import 'package:prism/features/auth/data/datasources/remote.dart';
 
 
 /* Transaction Feature Imports */
-// import 'package:prism/features/finance/data/repositories/expense_repository_impl.dart';
-// import 'package:prism/features/finance/domain/repositories/expense_repository.dart';
-// import 'package:prism/features/finance/domain/usecases/create_finance.dart';
-// import 'package:prism/features/finance/presentation/bloc/finance_bloc.dart';
-// import 'package:prism/features/finance/domain/usecases/delete_finance.dart';
-// import 'package:prism/features/finance/domain/usecases/update_finance.dart';
-// import 'package:prism/features/finance/domain/usecases/get_finances.dart';
-// import 'package:prism/features/finance/domain/usecases/get_finance.dart';
-// import 'package:prism/features/finance/data/datasources/remote.dart';
-// import 'package:prism/features/finance/data/datasources/local.dart';
+import 'package:prism/features/finance/data/repositories/expense_repository_impl.dart';
+import 'package:prism/features/finance/domain/repositories/expense_repository.dart';
+import 'package:prism/features/finance/domain/usecases/create_expense.dart';
+import 'package:prism/features/finance/presentation/bloc/finance_bloc.dart';
+import 'package:prism/features/finance/domain/usecases/remove_expense.dart';
+import 'package:prism/features/finance/domain/usecases/update_expense.dart';
+import 'package:prism/features/finance/domain/usecases/get_expenses.dart';
+import 'package:prism/features/finance/domain/usecases/get_expense.dart';
+import 'package:prism/features/finance/data/datasources/remote.dart';
+
 
 part 'dependencies.main.dart';

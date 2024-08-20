@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /* Project Imports */
+import 'package:prism/features/finance/presentation/bloc/finance_bloc.dart';
 import 'package:prism/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:prism/core/common/cubit/theme/theme_cubit.dart';
 import 'package:prism/core/common/cubit/user/user_cubit.dart';
@@ -29,6 +30,9 @@ void main() async {
         ),
         BlocProvider(
           create: (context) => serviceLocator<AuthBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => serviceLocator<FinanceBloc>(),
         ),
         BlocProvider(
           create: (context) => serviceLocator<ThemeCubit>(),

@@ -71,7 +71,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(height: 40),
                       const AuthTitle(title: 'Cadastro'),
                       const SizedBox(height: 40),
-                      const RegisterForm(),
+                      const AutofillGroup(
+                        child: RegisterForm(),
+                      ),
                       const SizedBox(height: 40),
                       RedirectLink(
                         text: 'Já tem uma conta?',

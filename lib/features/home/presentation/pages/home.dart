@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 /* Package Imports */
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:prism/features/finance/presentation/pages/finances.dart';
 
 /* Project Imports */
 import 'package:prism/features/home/presentation/widgets/user_information_card.dart';
@@ -104,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            Center(child: Text('Finanças')),
+            Center(child: FinancePage()),
           ],
         ),
       ),
