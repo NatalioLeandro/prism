@@ -15,6 +15,7 @@ class FinanceCreateEvent extends FinanceEvent {
   final String userId;
   final String title;
   final double amount;
+  final String groupId;
   final DateTime date;
   final ExpenseCategory category;
 
@@ -22,6 +23,7 @@ class FinanceCreateEvent extends FinanceEvent {
     required this.userId,
     required this.title,
     required this.amount,
+    required this.groupId,
     required this.date,
     required this.category,
   });
@@ -32,6 +34,7 @@ class FinanceUpdateEvent extends FinanceEvent {
   final String id;
   final String title;
   final double amount;
+  final String groupId;
   final DateTime date;
   final ExpenseCategory category;
 
@@ -40,6 +43,7 @@ class FinanceUpdateEvent extends FinanceEvent {
     required this.id,
     required this.title,
     required this.amount,
+    required this.groupId,
     required this.date,
     required this.category,
   });

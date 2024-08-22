@@ -16,7 +16,7 @@ class GroupModel extends GroupEntity {
       owner: json['owner'],
       name: json['name'],
       description: json['description'],
-      members: json['members'],
+      members: json['members'].map<String>((e) => e.toString()).toList(),
     );
   }
 

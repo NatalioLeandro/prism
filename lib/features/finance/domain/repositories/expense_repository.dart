@@ -11,6 +11,7 @@ abstract interface class ExpenseRepository {
     required String userId,
     required String title,
     required double amount,
+    required String groupId,
     required DateTime date,
     required ExpenseCategory category,
   });
@@ -25,6 +26,7 @@ abstract interface class ExpenseRepository {
     required String id,
     required String title,
     required double amount,
+    required String groupId,
     required DateTime date,
     required ExpenseCategory category,
   });

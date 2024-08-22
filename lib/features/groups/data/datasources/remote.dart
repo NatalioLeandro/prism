@@ -112,9 +112,8 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
     try {
       final groupCollection =
           await _firestore.collection('users/$owner/groups').get();
-      final groupData = groupCollection.docs.map((doc) => doc.data()).toList();
-
-      return groupData.map((group) => GroupModel.fromJson(group)).toList();
+      final groupsData = groupCollection.docs.map((doc) => doc.data()).toList();
+      return groupsData.map((group) => GroupModel.fromJson(group)).toList();
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     }

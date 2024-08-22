@@ -19,6 +19,7 @@ class UpdateExpense implements UseCase<ExpenseEntity, UpdateExpenseParams> {
       id: params.id,
       title: params.title,
       amount: params.amount,
+      groupId: params.groupId,
       date: params.date,
       category: params.category,
     );
@@ -30,6 +31,7 @@ class UpdateExpenseParams {
   final String id;
   final String title;
   final double amount;
+  final String groupId;
   final DateTime date;
   final ExpenseCategory category;
 
@@ -38,6 +40,7 @@ class UpdateExpenseParams {
     required this.id,
     required this.title,
     required this.amount,
+    required this.groupId,
     required this.date,
     required this.category,
   });

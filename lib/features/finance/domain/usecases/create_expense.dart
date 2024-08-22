@@ -19,6 +19,7 @@ class CreateExpense implements UseCase<ExpenseEntity, CreateExpenseParams> {
       userId: params.userId,
       title: params.title,
       amount: params.amount,
+      groupId: params.groupId,
       date: params.date,
       category: params.category,
     );
@@ -29,6 +30,7 @@ class CreateExpenseParams {
   final String userId;
   final String title;
   final double amount;
+  final String groupId;
   final DateTime date;
   final ExpenseCategory category;
 
@@ -36,6 +38,7 @@ class CreateExpenseParams {
     required this.userId,
     required this.title,
     required this.amount,
+    required this.groupId,
     required this.date,
     required this.category,
   });

@@ -7,6 +7,7 @@ class ExpenseModel extends ExpenseEntity {
     required super.id,
     required super.title,
     required super.amount,
+    required super.groupId,
     required super.date,
     required super.category,
   });
@@ -16,6 +17,7 @@ class ExpenseModel extends ExpenseEntity {
       id: json['id'],
       title: json['title'],
       amount: (json['amount'] ?? 0.0).toDouble(),
+      groupId: json['groupId'] ?? '',
       date: DateTime.parse(json['date']),
       category: ExpenseCategory.values.firstWhere(
         (e) => e.toString() == json['category'],
@@ -29,6 +31,7 @@ class ExpenseModel extends ExpenseEntity {
       'id': id,
       'title': title,
       'amount': amount,
+      'groupId': groupId,
       'date': date.toIso8601String(),
       'category': category.toString(),
     };
@@ -38,6 +41,7 @@ class ExpenseModel extends ExpenseEntity {
     String? id,
     String? title,
     double? amount,
+    String? groupId,
     DateTime? date,
     ExpenseCategory? category,
   }) {
@@ -45,6 +49,7 @@ class ExpenseModel extends ExpenseEntity {
       id: id ?? this.id,
       title: title ?? this.title,
       amount: amount ?? this.amount,
+      groupId: groupId ?? this.groupId,
       date: date ?? this.date,
       category: category ?? this.category,
     );

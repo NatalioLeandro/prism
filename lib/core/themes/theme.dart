@@ -22,6 +22,12 @@ class CustomTheme {
     appBarTheme: const AppBarTheme(
       backgroundColor: Palette.primary,
     ),
+    chipTheme: const ChipThemeData(
+      color: WidgetStatePropertyAll(
+        Palette.background,
+      ),
+      side: BorderSide.none,
+    ),
     datePickerTheme: DatePickerThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
@@ -33,12 +39,6 @@ class CustomTheme {
       confirmButtonStyle: ButtonStyle(
         foregroundColor: WidgetStateProperty.all(Palette.black),
       ),
-    ),
-    chipTheme: const ChipThemeData(
-      color: WidgetStatePropertyAll(
-        Palette.background,
-      ),
-      side: BorderSide.none,
     ),
     navigationBarTheme: const NavigationBarThemeData(
       backgroundColor: Palette.primary,
@@ -56,9 +56,11 @@ class CustomTheme {
       contentPadding: const EdgeInsets.all(10),
       labelStyle: const TextStyle(
         color: Palette.black,
+        fontFamily: 'Montserrat',
         fontSize: 14,
       ),
       hintStyle: const TextStyle(
+        fontFamily: 'Montserrat',
         fontSize: 14,
       ),
       focusedBorder: _border(Palette.black),

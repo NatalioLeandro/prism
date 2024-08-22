@@ -27,6 +27,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
     required title,
     required double amount,
     required DateTime date,
+    required String groupId,
     required category,
   }) async {
     return _getExpenseEntity(
@@ -36,6 +37,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
           id: const Uuid().v4(),
           title: title,
           amount: amount,
+          groupId: groupId,
           date: date,
           category: category,
         ),
@@ -90,6 +92,8 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
         userId: userId,
       );
 
+      print("Expenses: $expenses");
+
       return right(expenses);
     } on ServerException catch (e) {
       return left(Failure(e.message));
@@ -102,6 +106,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
     required String id,
     required title,
     required double amount,
+    required String groupId,
     required DateTime date,
     required category,
   }) async {
@@ -112,6 +117,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
           id: id,
           title: title,
           amount: amount,
+          groupId: groupId,
           date: date,
           category: category,
         ),
