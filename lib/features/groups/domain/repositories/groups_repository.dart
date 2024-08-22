@@ -12,7 +12,7 @@ abstract interface class GroupRepository {
     required String owner,
     required String name,
     required String description,
-    required List<UserEntity> members,
+    required List<String> members,
   });
 
   Future<Either<Failure, void>> removeGroup({
@@ -25,7 +25,7 @@ abstract interface class GroupRepository {
     required String id,
     required String name,
     required String description,
-    required List<UserEntity> members,
+    required List<String> members,
   });
 
   Future<Either<Failure, GroupEntity>> getGroup({
@@ -45,13 +45,13 @@ abstract interface class GroupRepository {
   Future<Either<Failure, void>> addGroupMember({
     required String owner,
     required String id,
-    required UserEntity user,
+    required String user,
   });
 
   Future<Either<Failure, void>> removeGroupMember({
     required String owner,
     required String id,
-    required UserEntity user,
+    required String user,
   });
 
   Future<Either<Failure, List<ExpenseEntity>>> getGroupExpenses({

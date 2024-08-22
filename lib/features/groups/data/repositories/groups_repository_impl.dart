@@ -9,7 +9,6 @@ import 'package:prism/features/groups/data/datasources/remote.dart';
 import 'package:prism/features/groups/domain/entities/group.dart';
 import 'package:prism/features/groups/data/models/group.dart';
 import 'package:prism/core/network/connection_checker.dart';
-import 'package:prism/features/auth/data/models/user.dart';
 import 'package:prism/core/common/entities/user.dart';
 import 'package:prism/core/constants/constants.dart';
 import 'package:prism/core/errors/exceptions.dart';
@@ -29,7 +28,7 @@ class GroupRepositoryImpl implements GroupRepository {
     required String owner,
     required String name,
     required String description,
-    required List<UserEntity> members,
+    required List<String> members,
   }) async {
     return _getGroupEntity(
       () async => await _groupRemoteDataSource.createGroup(
@@ -71,7 +70,7 @@ class GroupRepositoryImpl implements GroupRepository {
     required String id,
     required String name,
     required String description,
-    required List<UserEntity> members,
+    required List<String> members,
   }) async {
     return _getGroupEntity(
       () async => await _groupRemoteDataSource.updateGroup(
@@ -144,7 +143,7 @@ class GroupRepositoryImpl implements GroupRepository {
   Future<Either<Failure, void>> addGroupMember({
     required String owner,
     required String id,
-    required UserEntity user,
+    required String user,
   }) async {
     try {
       if (!await _connectionChecker.connected) {
@@ -154,7 +153,7 @@ class GroupRepositoryImpl implements GroupRepository {
       await _groupRemoteDataSource.addGroupMember(
         owner: owner,
         groupId: id,
-        user: UserModel.fromEntity(user),
+        user: user,
       );
 
       return right(null);
@@ -167,7 +166,7 @@ class GroupRepositoryImpl implements GroupRepository {
   Future<Either<Failure, void>> removeGroupMember({
     required String owner,
     required String id,
-    required UserEntity user,
+    required String user,
   }) async {
     try {
       if (!await _connectionChecker.connected) {
@@ -177,7 +176,7 @@ class GroupRepositoryImpl implements GroupRepository {
       await _groupRemoteDataSource.removeGroupMember(
         owner: owner,
         groupId: id,
-        user: UserModel.fromEntity(user),
+        user: user,
       );
 
       return right(null);

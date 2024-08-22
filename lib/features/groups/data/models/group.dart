@@ -1,7 +1,5 @@
 /* Project Imports */
 import 'package:prism/features/groups/domain/entities/group.dart';
-import 'package:prism/features/auth/data/models/user.dart';
-import 'package:prism/core/common/entities/user.dart';
 
 class GroupModel extends GroupEntity {
   GroupModel({
@@ -18,9 +16,7 @@ class GroupModel extends GroupEntity {
       owner: json['owner'],
       name: json['name'],
       description: json['description'],
-      members: (json['members'] as List<dynamic>)
-          .map((memberJson) => UserModel.fromJson(memberJson))
-          .toList(),
+      members: json['members'],
     );
   }
 
@@ -30,8 +26,7 @@ class GroupModel extends GroupEntity {
       'owner': owner,
       'name': name,
       'description': description,
-      'members':
-          members.map((member) => (member as UserModel).toJson()).toList(),
+      'members': members,
     };
   }
 
@@ -40,7 +35,7 @@ class GroupModel extends GroupEntity {
     String? owner,
     String? name,
     String? description,
-    List<UserEntity>? members,
+    List<String>? members,
   }) {
     return GroupModel(
       id: id ?? this.id,

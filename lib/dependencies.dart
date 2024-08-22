@@ -35,5 +35,20 @@ import 'package:prism/features/finance/domain/usecases/get_expenses.dart';
 import 'package:prism/features/finance/domain/usecases/get_expense.dart';
 import 'package:prism/features/finance/data/datasources/remote.dart';
 
+/* Group Feature Imports */
+import 'package:prism/features/groups/data/repositories/groups_repository_impl.dart';
+import 'package:prism/features/groups/domain/repositories/groups_repository.dart';
+import 'package:prism/features/groups/domain/usecases/remove_group_member.dart';
+import 'package:prism/features/groups/domain/usecases/get_group_expenses.dart';
+import 'package:prism/features/groups/domain/usecases/get_group_members.dart';
+import 'package:prism/features/groups/domain/usecases/add_group_member.dart';
+import 'package:prism/features/groups/presentation/bloc/groups_bloc.dart';
+import 'package:prism/features/groups/domain/usecases/update_group.dart';
+import 'package:prism/features/groups/domain/usecases/remove_group.dart';
+import 'package:prism/features/groups/domain/usecases/create_group.dart';
+import 'package:prism/features/groups/domain/usecases/get_groups.dart';
+import 'package:prism/features/groups/domain/usecases/get_group.dart';
+import 'package:prism/features/groups/data/datasources/remote.dart';
+
 
 part 'dependencies.main.dart';

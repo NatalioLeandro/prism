@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 /* Package Imports */
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prism/features/finance/presentation/pages/finances.dart';
+import 'package:prism/features/groups/presentation/pages/group.dart';
 
 /* Project Imports */
 import 'package:prism/features/home/presentation/widgets/user_information_card.dart';
@@ -97,7 +98,7 @@ class _HomePageState extends State<HomePage> {
         child: IndexedStack(
           index: _currentIndex,
           children: const [
-            Center(child: Text('Grupos')),
+            Center(child: GroupPage()),
             Center(
               child: Column(
                 children: [

@@ -40,13 +40,13 @@ abstract interface class GroupRemoteDataSource {
   Future<void> addGroupMember({
     required String owner,
     required String groupId,
-    required UserModel user,
+    required String user,
   });
 
   Future<void> removeGroupMember({
     required String owner,
     required String groupId,
-    required UserModel user,
+    required String user,
   });
 
   Future<List<ExpenseModel>> getGroupExpenses({
@@ -66,10 +66,11 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
     required GroupModel group,
   }) async {
     try {
+      final groupId = group.id;
       final groupCollection = _firestore.collection('users/$owner/groups');
-      final groupDocument = await groupCollection.add(group.toJson());
+      await groupCollection.doc(groupId).set(group.toJson());
 
-      return group.copyWith(id: groupDocument.id);
+      return group;
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     }
@@ -155,12 +156,20 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
   Future<void> addGroupMember({
     required String owner,
     required String groupId,
-    required UserModel user,
+    required String user,
   }) async {
     try {
-      final groupMembers =
-          _firestore.collection('users/$owner/groups/$groupId/members');
-      await groupMembers.add(user.toJson());
+      final document = _firestore.doc('users/$owner/groups/$groupId');
+
+      final groupMembers = await document.get();
+      final members = groupMembers.data()!['members'] as List<dynamic>;
+      if (members.contains(user)) {
+        return;
+      }
+
+      await document.update({
+        'members': FieldValue.arrayUnion([user]),
+      });
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     }
@@ -170,14 +179,13 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
   Future<void> removeGroupMember({
     required String owner,
     required String groupId,
-    required UserModel user,
+    required String user,
   }) async {
     try {
-      final groupMembers =
-          _firestore.collection('users/$owner/groups/$groupId/members');
-      final memberDocument =
-          await groupMembers.where('id', isEqualTo: user.id).get();
-      await memberDocument.docs.first.reference.delete();
+      final document = _firestore.doc('users/$owner/groups/$groupId');
+      await document.update({
+        'members': FieldValue.arrayRemove([user]),
+      });
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     }

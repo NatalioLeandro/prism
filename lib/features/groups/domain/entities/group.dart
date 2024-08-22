@@ -6,7 +6,7 @@ class GroupEntity {
   final String owner;
   final String name;
   final String description;
-  final List<UserEntity> members;
+  final List<String> members;
 
   GroupEntity({
     required this.id,

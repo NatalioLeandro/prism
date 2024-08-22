@@ -4,7 +4,6 @@ import 'package:fpdart/fpdart.dart';
 /* Project Imports */
 import 'package:prism/features/groups/domain/repositories/groups_repository.dart';
 import 'package:prism/features/groups/domain/entities/group.dart';
-import 'package:prism/core/common/entities/user.dart';
 import 'package:prism/core/errors/failures.dart';
 import 'package:prism/core/usecase/usecase.dart';
 
@@ -30,7 +29,7 @@ class UpdateGroupParams {
   final String id;
   final String name;
   final String description;
-  final List<UserEntity> members;
+  final List<String> members;
 
   UpdateGroupParams({
     required this.userId,

@@ -5,6 +5,7 @@ final serviceLocator = GetIt.instance;
 Future<void> initDependencies() async {
   _initAuth();
   _initFinances();
+  _initGroups();
 
   serviceLocator.registerLazySingleton(
     () => FirebaseAuth.instance,
@@ -141,11 +142,9 @@ void _initFinances() {
         serviceLocator(),
       ),
     )
-    ..registerFactory(
-      () => GetExpense(
-        serviceLocator(),
-      )
-    )
+    ..registerFactory(() => GetExpense(
+          serviceLocator(),
+        ))
     // Bloc
     ..registerLazySingleton(
       () => FinanceBloc(
@@ -154,6 +153,83 @@ void _initFinances() {
         removeExpense: serviceLocator(),
         getExpenses: serviceLocator(),
         getExpense: serviceLocator(),
+      ),
+    );
+}
+
+void _initGroups() {
+  // Data sources
+  serviceLocator
+    ..registerFactory<GroupRemoteDataSource>(
+      () => GroupRemoteDataSourceImpl(
+        serviceLocator(),
+      ),
+    )
+    // Repositories
+    ..registerFactory<GroupRepository>(
+      () => GroupRepositoryImpl(
+        serviceLocator(),
+        serviceLocator(),
+      ),
+    )
+    // Use cases
+    ..registerFactory(
+      () => CreateGroup(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => RemoveGroup(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => UpdateGroup(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetGroup(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetGroups(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetGroupMembers(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => AddGroupMember(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => RemoveGroupMember(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetGroupExpenses(
+        serviceLocator(),
+      ),
+    )
+    // Bloc
+    ..registerLazySingleton(
+      () => GroupsBloc(
+        createGroup: serviceLocator(),
+        removeGroup: serviceLocator(),
+        updateGroup: serviceLocator(),
+        getGroup: serviceLocator(),
+        getGroups: serviceLocator(),
+        getGroupMembers: serviceLocator(),
+        addGroupMember: serviceLocator(),
+        removeGroupMember: serviceLocator(),
+        getGroupExpenses: serviceLocator(),
       ),
     );
 }
