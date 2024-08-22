@@ -1,0 +1,4 @@
+enum ExpenseType {
+  variable,
+  fixed,
+}

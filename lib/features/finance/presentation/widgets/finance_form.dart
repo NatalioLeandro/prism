@@ -9,7 +9,7 @@ import 'package:prism/core/common/cubit/user/user_cubit.dart';
 import 'package:prism/core/common/widgets/date_field.dart';
 import 'package:prism/core/common/widgets/form_field.dart';
 import 'package:prism/core/common/widgets/button.dart';
-import 'package:prism/core/common/widgets/select_field.dart';
+import 'package:prism/core/common/widgets/radio_select_field.dart';
 import 'package:prism/core/enums/expense_category.dart';
 import 'package:prism/features/finance/presentation/bloc/finance_bloc.dart';
 
@@ -29,6 +29,16 @@ class _FinanceFormState extends State<FinanceForm> {
   final _amountController = TextEditingController();
   final _dateController = TextEditingController();
   final _categoryController = TextEditingController();
+
+  final Map<String, ExpenseCategory> categoryMap = {
+    'Alimentação': ExpenseCategory.food,
+    'Transporte': ExpenseCategory.transport,
+    'Compras': ExpenseCategory.shopping,
+    'Saúde': ExpenseCategory.health,
+    'Entretenimento': ExpenseCategory.entertainment,
+    'Educação': ExpenseCategory.education,
+    'Outros': ExpenseCategory.others,
+  };
 
   @override
   void dispose() {
@@ -66,7 +76,7 @@ class _FinanceFormState extends State<FinanceForm> {
           const SizedBox(height: 15),
           CustomRadioFormField(
             hint: 'Selecione a categoria',
-            options: ExpenseCategory.values.map((e) => e.name).toList(),
+            options: categoryMap.keys.toList(),
             groupValue: _categoryController.text,
             onChanged: (value) {
               setState(() {
@@ -85,13 +95,7 @@ class _FinanceFormState extends State<FinanceForm> {
                         title: _titleController.text,
                         amount: double.parse(_amountController.text),
                         date: DateTime.parse(_dateController.text),
-                        category: ExpenseCategory.values.firstWhere(
-                          (e) =>
-                              e.name ==
-                              _categoryController.text
-                                  .toLowerCase()
-                                  .replaceAll(' ', '_')
-                        ),
+                        category: categoryMap[_categoryController.text]!,
                       ),
                     );
               }

@@ -22,6 +22,18 @@ class CustomTheme {
     appBarTheme: const AppBarTheme(
       backgroundColor: Palette.primary,
     ),
+    datePickerTheme: DatePickerThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+      ),
+      backgroundColor: Palette.background,
+      cancelButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStateProperty.all(Palette.black),
+      ),
+      confirmButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStateProperty.all(Palette.black),
+      ),
+    ),
     chipTheme: const ChipThemeData(
       color: WidgetStatePropertyAll(
         Palette.background,
@@ -78,6 +90,18 @@ class CustomTheme {
     chipTheme: const ChipThemeData(
       backgroundColor: Palette.backgroundDark,
       side: BorderSide.none,
+    ),
+    datePickerTheme: DatePickerThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+      ),
+      backgroundColor: Palette.backgroundDark,
+      cancelButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStateProperty.all(Palette.white),
+      ),
+      confirmButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStateProperty.all(Palette.white),
+      ),
     ),
     navigationBarTheme: const NavigationBarThemeData(
       backgroundColor: Palette.primaryDark,

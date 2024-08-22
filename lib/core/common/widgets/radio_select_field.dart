@@ -1,9 +1,6 @@
 /* Flutter Imports */
 import 'package:flutter/material.dart';
 
-/* Project Imports */
-import 'package:prism/core/themes/palette.dart';
-
 class CustomRadioFormField extends StatefulWidget {
   final String hint;
   final List<String> options;
@@ -30,23 +27,27 @@ class _CustomRadioFormFieldState extends State<CustomRadioFormField> {
       children: [
         Text(
           widget.hint,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 14,
-            color: Palette.white,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
         ),
         const SizedBox(height: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        GridView.count(
+          crossAxisCount: 2,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          childAspectRatio: 3,
           children: widget.options.map((option) {
             return RadioListTile(
               title: Text(
                 option,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Palette.white,
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
+              fillColor: WidgetStateProperty.all(Theme.of(context).colorScheme.secondary),
               value: option,
               groupValue: widget.groupValue,
               onChanged: (value) {
@@ -56,7 +57,7 @@ class _CustomRadioFormFieldState extends State<CustomRadioFormField> {
               },
             );
           }).toList(),
-        ),
+        )
       ],
     );
   }

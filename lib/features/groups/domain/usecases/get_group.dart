@@ -7,24 +7,26 @@ import 'package:prism/features/groups/domain/entities/group.dart';
 import 'package:prism/core/errors/failures.dart';
 import 'package:prism/core/usecase/usecase.dart';
 
-class GetGroups implements UseCase<List<GroupEntity>, GetGroupsParams> {
+class GetGroup implements UseCase<GroupEntity, GetGroupParams> {
   final GroupRepository _groupRepository;
 
-  GetGroups(this._groupRepository);
+  GetGroup(this._groupRepository);
 
   @override
-  Future<Either<Failure, List<GroupEntity>>> call(
-      GetGroupsParams params) async {
-    return await _groupRepository.getGroups(
+  Future<Either<Failure, GroupEntity>> call(GetGroupParams params) async {
+    return await _groupRepository.getGroup(
       owner: params.owner,
+      id: params.id,
     );
   }
 }
 
-class GetGroupsParams {
+class GetGroupParams {
   final String owner;
+  final String id;
 
-  GetGroupsParams({
+  GetGroupParams({
     required this.owner,
+    required this.id,
   });
 }

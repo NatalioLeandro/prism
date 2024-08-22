@@ -5,5 +5,5 @@ enum ExpenseCategory {
   health,
   entertainment,
   education,
-  others,
+  others;
 }

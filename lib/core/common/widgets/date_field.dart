@@ -2,9 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-/* Project Imports */
-import 'package:prism/core/themes/palette.dart';
-
 class DateFormField extends StatelessWidget {
   final String hint;
   final TextEditingController controller;
@@ -39,24 +36,27 @@ class DateFormField extends StatelessWidget {
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(15),
         hintText: hint,
-        hintStyle: const TextStyle(
+        hintStyle: TextStyle(
           fontSize: 14,
-          color: Palette.white,
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+        suffixIcon: IconButton(
+          onPressed: () => _selectDate(context),
+          icon: const Icon(Icons.calendar_today),
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
       ),
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 14,
-        color: Palette.white,
+        color: Theme.of(context).colorScheme.onPrimary,
       ),
-      validator: validator ?? (value) {
-        if (value == null || value.isEmpty) {
-          return 'Campo obrigatório';
-        }
-        return null;
-      },
+      validator: validator ??
+          (value) {
+            if (value == null || value.isEmpty) {
+              return 'Campo obrigatório';
+            }
+            return null;
+          },
     );
   }
 }

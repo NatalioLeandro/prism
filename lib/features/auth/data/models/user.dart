@@ -68,4 +68,15 @@ class UserModel extends UserEntity {
       account: account ?? this.account,
     );
   }
+
+  static fromEntity(UserEntity user) {
+    return UserModel(
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      photo: user.photo,
+      fixedIncome: user.fixedIncome,
+      account: user.account,
+    );
+  }
 }
