@@ -37,17 +37,18 @@ class _CustomRadioFormFieldState extends State<CustomRadioFormField> {
           crossAxisCount: 2,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          childAspectRatio: 3,
+          childAspectRatio: 3.5,
           children: widget.options.map((option) {
             return RadioListTile(
               title: Text(
                 option,
                 style: TextStyle(
-                  fontSize: 11,
+                  fontSize: 12,
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
-              fillColor: WidgetStateProperty.all(Theme.of(context).colorScheme.secondary),
+              fillColor: WidgetStateProperty.all(
+                  Theme.of(context).colorScheme.secondary),
               value: option,
               groupValue: widget.groupValue,
               onChanged: (value) {

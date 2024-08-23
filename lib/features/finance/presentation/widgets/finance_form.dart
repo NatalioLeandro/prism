@@ -16,7 +16,6 @@ import 'package:prism/core/common/widgets/form_field.dart';
 import 'package:prism/core/common/widgets/button.dart';
 import 'package:prism/core/constants/constants.dart';
 
-
 class FinanceForm extends StatefulWidget {
   const FinanceForm({
     super.key,
@@ -84,7 +83,6 @@ class _FinanceFormState extends State<FinanceForm> {
             controller: _dateController,
           ),
           const SizedBox(height: 15),
-          const Divider(),
           BlocBuilder<GroupsBloc, GroupsState>(
             builder: (context, state) {
               if (state is GroupsLoadingState) {
@@ -118,7 +116,6 @@ class _FinanceFormState extends State<FinanceForm> {
               }
             },
           ),
-          const Divider(),
           const SizedBox(height: 15),
           CustomRadioFormField(
             hint: 'Selecione a categoria',
@@ -130,7 +127,7 @@ class _FinanceFormState extends State<FinanceForm> {
               });
             },
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 25),
           CustomButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
@@ -150,7 +147,8 @@ class _FinanceFormState extends State<FinanceForm> {
                           amount: double.parse(_amountController.text),
                           groupId: selectedGroup,
                           date: DateTime.parse(_dateController.text),
-                          category: Constants().categoryMap[_categoryController.text]!,
+                          category: Constants()
+                              .categoryMap[_categoryController.text]!,
                         ),
                       );
                 } else {

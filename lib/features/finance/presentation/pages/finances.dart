@@ -1,11 +1,7 @@
 /* Flutter Imports */
 import 'package:flutter/material.dart';
 
-/* Package Imports */
-// import 'package:flutter_bloc/flutter_bloc.dart';
-
-// import 'package:prism/features/finance/presentation/widgets/finance_form.dart';
-// import 'package:prism/features/finance/presentation/widgets/finance_list.dart';
+/* Project Imports */
 import 'package:prism/features/finance/presentation/widgets/finance_list_grid.dart';
 
 class FinancePage extends StatefulWidget {
@@ -18,9 +14,8 @@ class FinancePage extends StatefulWidget {
 class _FinancePageState extends State<FinancePage> {
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(5.0),
-      child: FinanceListGrid(),
+    return const Scaffold(
+      body: FinanceListGrid(),
     );
   }
 }

@@ -1,9 +1,9 @@
 /* Flutter Imports */
 import 'package:flutter/material.dart';
-import 'package:prism/features/auth/presentation/pages/password_recover.dart';
 
 /* Project Imports */
-// import 'package:prism/features/transaction/presentation/pages/create.dart';
+import 'package:prism/features/finance/presentation/pages/create_finance.dart';
+import 'package:prism/features/auth/presentation/pages/password_recover.dart';
 import 'package:prism/features/auth/presentation/pages/register.dart';
 import 'package:prism/features/auth/presentation/pages/login.dart';
 import 'package:prism/features/home/presentation/pages/home.dart';
@@ -14,6 +14,7 @@ const String home = '/home';
 const String login = '/login';
 const String register = '/register';
 const String transaction = '/transaction';
+const String createFinance = '/create-finance';
 const String passwordRecover = '/password-recover';
 
 Route controller(RouteSettings settings) {
@@ -22,10 +23,6 @@ Route controller(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (_) => const SplashPage(),
       );
-    // case home:
-    //   return MaterialPageRoute(
-    //     builder: (_) => const HomePage(),
-    //   );
     case login:
       return MaterialPageRoute(
         builder: (_) => const LoginPage(),
@@ -38,10 +35,10 @@ Route controller(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (_) => const PasswordRecoverPage(),
       );
-    // case transaction:
-    //   return MaterialPageRoute(
-    //     builder: (_) => const CreateTransactionPage(),
-    //   );
+    case createFinance:
+      return MaterialPageRoute(
+        builder: (_) => const CreateFinancePage(),
+      );
     case home:
       return MaterialPageRoute(
         builder: (_) => const HomePage(),

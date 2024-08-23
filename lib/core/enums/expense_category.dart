@@ -3,7 +3,6 @@ enum ExpenseCategory {
   transport,
   shopping,
   health,
-  entertainment,
   education,
   others;
 }

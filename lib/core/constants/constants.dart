@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:prism/core/enums/expense_category.dart';
 
 class Constants {
-
   static const connectionError = 'Sem conexão com a internet.';
   static const unexpectedError = 'Ocorreu um erro inesperado.';
 
@@ -14,7 +13,6 @@ class Constants {
     'Transporte': ExpenseCategory.transport,
     'Compras': ExpenseCategory.shopping,
     'Saúde': ExpenseCategory.health,
-    'Entretenimento': ExpenseCategory.entertainment,
     'Educação': ExpenseCategory.education,
     'Outros': ExpenseCategory.others,
   };
@@ -24,9 +22,7 @@ class Constants {
     'Transporte': const Color(0xFF81C784),
     'Compras': const Color(0xFF64B5F6),
     'Saúde': const Color(0xFF9575CD),
-    'Entretenimento': const Color(0xFFFFD54F),
     'Educação': const Color(0xFF4DB6AC),
     'Outros': const Color(0xFFA1887F),
   };
-
 }
