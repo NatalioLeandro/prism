@@ -90,7 +90,6 @@ class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
           await _firestore.collection('users/$userId/expenses').get();
       final expensesData =
           expensesCollection.docs.map((doc) => doc.data()).toList();
-
       return expensesData.map((data) => ExpenseModel.fromJson(data)).toList();
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());

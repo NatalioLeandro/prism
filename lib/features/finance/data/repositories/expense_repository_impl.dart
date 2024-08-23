@@ -87,13 +87,9 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
       if (!await _connectionChecker.connected) {
         return left(Failure(Constants.connectionError));
       }
-
       final expenses = await _expenseRemoteDataSource.getExpenses(
         userId: userId,
       );
-
-      print("Expenses: $expenses");
-
       return right(expenses);
     } on ServerException catch (e) {
       return left(Failure(e.message));

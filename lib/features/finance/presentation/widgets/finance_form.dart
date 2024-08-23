@@ -13,8 +13,9 @@ import 'package:prism/features/groups/data/models/group.dart';
 import 'package:prism/core/common/cubit/user/user_cubit.dart';
 import 'package:prism/core/common/widgets/date_field.dart';
 import 'package:prism/core/common/widgets/form_field.dart';
-import 'package:prism/core/enums/expense_category.dart';
 import 'package:prism/core/common/widgets/button.dart';
+import 'package:prism/core/constants/constants.dart';
+
 
 class FinanceForm extends StatefulWidget {
   const FinanceForm({
@@ -33,16 +34,6 @@ class _FinanceFormState extends State<FinanceForm> {
   final _groupController = TextEditingController();
   final _dateController = TextEditingController();
   final _categoryController = TextEditingController();
-
-  final Map<String, ExpenseCategory> categoryMap = {
-    'Alimentação': ExpenseCategory.food,
-    'Transporte': ExpenseCategory.transport,
-    'Compras': ExpenseCategory.shopping,
-    'Saúde': ExpenseCategory.health,
-    'Entretenimento': ExpenseCategory.entertainment,
-    'Educação': ExpenseCategory.education,
-    'Outros': ExpenseCategory.others,
-  };
 
   @override
   void initState() {
@@ -131,7 +122,7 @@ class _FinanceFormState extends State<FinanceForm> {
           const SizedBox(height: 15),
           CustomRadioFormField(
             hint: 'Selecione a categoria',
-            options: categoryMap.keys.toList(),
+            options: Constants().categoryMap.keys.toList(),
             groupValue: _categoryController.text,
             onChanged: (value) {
               setState(() {
@@ -159,7 +150,7 @@ class _FinanceFormState extends State<FinanceForm> {
                           amount: double.parse(_amountController.text),
                           groupId: selectedGroup,
                           date: DateTime.parse(_dateController.text),
-                          category: categoryMap[_categoryController.text]!,
+                          category: Constants().categoryMap[_categoryController.text]!,
                         ),
                       );
                 } else {
