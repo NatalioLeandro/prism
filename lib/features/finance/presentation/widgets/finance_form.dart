@@ -72,7 +72,7 @@ class _FinanceFormState extends State<FinanceForm> {
             icon: Icons.title,
             controller: _titleController,
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 10),
           CustomFormField(
             hint: 'Digite o valor',
             label: 'Valor',
@@ -80,12 +80,12 @@ class _FinanceFormState extends State<FinanceForm> {
             icon: Icons.monetization_on_outlined,
             controller: _amountController,
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 10),
           DateFormField(
             hint: 'Selecione a data',
             controller: _dateController,
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 10),
           CustomRadioFormField(
             hint: 'Selecione o tipo',
             options: Constants().typeMap.keys.toList(),
@@ -96,15 +96,16 @@ class _FinanceFormState extends State<FinanceForm> {
               });
             },
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 10),
           BlocBuilder<GroupsBloc, GroupsState>(
             builder: (context, state) {
               if (state is GroupsLoadingState) {
                 return const CircularProgressIndicator();
               } else if (state is GroupsSuccessState) {
                 final groups = state.groups;
+                final filteredGroups = groups.where((group) => group.id != '0').toList();
 
-                groups.insert(
+                filteredGroups.insert(
                   0,
                   GroupModel(
                     id: '0',
@@ -117,7 +118,7 @@ class _FinanceFormState extends State<FinanceForm> {
 
                 return CustomSelectFormField(
                   hint: 'Associar a um grupo',
-                  options: groups.map((e) => e.name).toList(),
+                  options: filteredGroups.map((e) => e.name).toList(),
                   selectedValue: _groupController.text,
                   onChanged: (value) {
                     setState(() {
@@ -130,7 +131,7 @@ class _FinanceFormState extends State<FinanceForm> {
               }
             },
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 10),
           CustomRadioFormField(
             hint: 'Selecione a categoria',
             options: Constants().categoryMap.keys.toList(),
@@ -141,8 +142,9 @@ class _FinanceFormState extends State<FinanceForm> {
               });
             },
           ),
-          const SizedBox(height: 25),
+          const SizedBox(height: 10),
           CustomButton(
+            width: 140,
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 final user = context.read<UserCubit>().state;

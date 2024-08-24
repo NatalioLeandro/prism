@@ -140,12 +140,18 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
     required String groupId,
   }) async {
     try {
-      final groupMembers = await _firestore
-          .collection('users/$owner/groups/$groupId/members')
-          .get();
-      final membersData = groupMembers.docs.map((doc) => doc.data()).toList();
+      final group = await _firestore.doc('users/$owner/groups/$groupId').get();
+      final members = group.data()!['members'] as List<dynamic>;
 
-      return membersData.map((member) => UserModel.fromJson(member)).toList();
+      final membersData = await Future.wait(
+        members.map((member) async {
+          final memberDocument = await _firestore.doc('users/$member').get();
+          final memberData = memberDocument.data() as Map<String, dynamic>;
+          return UserModel.fromJson(memberData);
+        }),
+      );
+
+      return membersData;
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     }
@@ -196,14 +202,16 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
     required String groupId,
   }) async {
     try {
-      final groupExpenses = await _firestore
-          .collection('users/$owner/groups/$groupId/expenses')
-          .get();
-      final expensesData = groupExpenses.docs.map((doc) => doc.data()).toList();
+      final expensesCollection =
+          await _firestore.collection('users/$owner/expenses').get();
+      final expensesData =
+          expensesCollection.docs.map((doc) => doc.data()).toList();
 
-      return expensesData
-          .map((expense) => ExpenseModel.fromJson(expense))
+      final groupExpenses = expensesData
+          .where((expense) => expense['groupId'] == groupId)
           .toList();
+
+      return groupExpenses.map((data) => ExpenseModel.fromJson(data)).toList();
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     }

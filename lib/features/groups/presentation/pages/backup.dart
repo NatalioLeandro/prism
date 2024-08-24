@@ -19,12 +19,12 @@ class _GroupPageState extends State<GroupPage> {
     return const Padding(
       padding: EdgeInsets.all(20.0),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            GroupForm(),
-            GroupMemberForm()
-          ],
-        )
+          child: Column(
+            children: [
+              GroupForm(),
+              GroupMemberForm()
+            ],
+          )
       ),
     );
   }

@@ -5,11 +5,13 @@ class CustomButton extends StatelessWidget {
 
   final String text;
   final VoidCallback onPressed;
+  final double width;
 
   const CustomButton({
     super.key,
     required this.text,
     required this.onPressed,
+    this.width = double.infinity,
   });
 
   @override
@@ -19,7 +21,7 @@ class CustomButton extends StatelessWidget {
     final backgroundColor = theme.colorScheme.onPrimary;
 
     return Container(
-      width: double.infinity,
+      width: width,
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(5),
