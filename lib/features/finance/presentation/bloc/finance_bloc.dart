@@ -12,6 +12,7 @@ import 'package:prism/features/finance/domain/usecases/get_expenses.dart';
 import 'package:prism/features/finance/domain/usecases/get_expense.dart';
 import 'package:prism/features/finance/domain/entities/expense.dart';
 import 'package:prism/core/enums/expense_category.dart';
+import 'package:prism/core/enums/expense_type.dart';
 
 part 'finance_event.dart';
 
@@ -56,6 +57,7 @@ class FinanceBloc extends Bloc<FinanceEvent, FinanceState> {
         groupId: event.groupId,
         date: event.date,
         category: event.category,
+        type: event.type,
       ),
     );
     result.fold(
@@ -77,6 +79,7 @@ class FinanceBloc extends Bloc<FinanceEvent, FinanceState> {
         groupId: event.groupId,
         date: event.date,
         category: event.category,
+        type: event.type,
       ),
     );
     result.fold(

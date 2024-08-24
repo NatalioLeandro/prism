@@ -42,10 +42,11 @@ class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
     required ExpenseModel expense,
   }) async {
     try {
+      final expenseId = expense.id;
       final expenseCollection = _firestore.collection('users/$userId/expenses');
-      final expenseDocument = await expenseCollection.add(expense.toJson());
+      await expenseCollection.doc(expenseId).set(expense.toJson());
 
-      return expense.copyWith(id: expenseDocument.id);
+      return expense;
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     }

@@ -23,7 +23,14 @@ class DateFormField extends StatelessWidget {
     );
 
     if (pickedDate != null) {
-      controller.text = DateFormat('yyyy-MM-dd').format(pickedDate);
+      final DateTime finalDateTime = DateTime(
+        pickedDate.year,
+        pickedDate.month,
+        pickedDate.day,
+        DateTime.now().hour,
+        DateTime.now().minute,
+      );
+      controller.text = DateFormat('yyyy-MM-dd HH:mm').format(finalDateTime);
     }
   }
 

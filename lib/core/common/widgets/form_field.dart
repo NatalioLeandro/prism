@@ -10,6 +10,7 @@ class CustomFormField extends StatelessWidget {
   final bool obscure;
   final String? Function(String?)? validator;
   final List<String> autofillHints;
+  final TextInputType? keyboardType;
 
   const CustomFormField({
     super.key,
@@ -17,6 +18,7 @@ class CustomFormField extends StatelessWidget {
     required this.label,
     required this.icon,
     required this.controller,
+    this.keyboardType = TextInputType.text,
     this.obscure = false,
     this.validator,
     this.autofillHints = const [],
@@ -28,6 +30,7 @@ class CustomFormField extends StatelessWidget {
       controller: controller,
       obscureText: obscure,
       autofillHints: autofillHints,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(15),
         hintText: hint,

@@ -30,9 +30,10 @@ class _FinanceFormState extends State<FinanceForm> {
 
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
-  final _groupController = TextEditingController();
+  final _groupController = TextEditingController(text: "0");
   final _dateController = TextEditingController();
   final _categoryController = TextEditingController();
+  final _typeController = TextEditingController();
 
   @override
   void initState() {
@@ -55,6 +56,7 @@ class _FinanceFormState extends State<FinanceForm> {
     _groupController.dispose();
     _dateController.dispose();
     _categoryController.dispose();
+    _typeController.dispose();
     super.dispose();
   }
 
@@ -74,6 +76,7 @@ class _FinanceFormState extends State<FinanceForm> {
           CustomFormField(
             hint: 'Digite o valor',
             label: 'Valor',
+            keyboardType: TextInputType.number,
             icon: Icons.monetization_on_outlined,
             controller: _amountController,
           ),
@@ -81,6 +84,17 @@ class _FinanceFormState extends State<FinanceForm> {
           DateFormField(
             hint: 'Selecione a data',
             controller: _dateController,
+          ),
+          const SizedBox(height: 15),
+          CustomRadioFormField(
+            hint: 'Selecione o tipo',
+            options: Constants().typeMap.keys.toList(),
+            groupValue: _typeController.text,
+            onChanged: (value) {
+              setState(() {
+                _typeController.text = value;
+              });
+            },
           ),
           const SizedBox(height: 15),
           BlocBuilder<GroupsBloc, GroupsState>(
@@ -137,6 +151,13 @@ class _FinanceFormState extends State<FinanceForm> {
                   final selectedGroup = groupsState.groups
                       .firstWhere(
                         (element) => element.name == _groupController.text,
+                        orElse: () => GroupModel(
+                          id: '0',
+                          name: 'Sem grupo',
+                          members: [],
+                          owner: '',
+                          description: '',
+                        ),
                       )
                       .id;
 
@@ -144,11 +165,12 @@ class _FinanceFormState extends State<FinanceForm> {
                         FinanceCreateEvent(
                           userId: user.id,
                           title: _titleController.text,
-                          amount: double.parse(_amountController.text),
+                          amount: double.parse(_amountController.text.replaceAll(',', '.')),
                           groupId: selectedGroup,
                           date: DateTime.parse(_dateController.text),
                           category: Constants()
                               .categoryMap[_categoryController.text]!,
+                          type: Constants().typeMap[_typeController.text]!,
                         ),
                       );
                 } else {

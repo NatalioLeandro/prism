@@ -1,6 +1,7 @@
 /* Project Imports */
 import 'package:prism/features/finance/domain/entities/expense.dart';
 import 'package:prism/core/enums/expense_category.dart';
+import 'package:prism/core/enums/expense_type.dart';
 
 class ExpenseModel extends ExpenseEntity {
   ExpenseModel({
@@ -10,6 +11,7 @@ class ExpenseModel extends ExpenseEntity {
     required super.groupId,
     required super.date,
     required super.category,
+    required super.type,
   });
 
   factory ExpenseModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,10 @@ class ExpenseModel extends ExpenseEntity {
         (e) => e.toString() == json['category'],
         orElse: () => ExpenseCategory.others,
       ),
+      type: ExpenseType.values.firstWhere(
+        (e) => e.toString() == json['type'],
+        orElse: () => ExpenseType.variable,
+      ),
     );
   }
 
@@ -34,6 +40,7 @@ class ExpenseModel extends ExpenseEntity {
       'groupId': groupId,
       'date': date.toIso8601String(),
       'category': category.toString(),
+      'type': type.toString(),
     };
   }
 
@@ -44,6 +51,7 @@ class ExpenseModel extends ExpenseEntity {
     String? groupId,
     DateTime? date,
     ExpenseCategory? category,
+    ExpenseType? type,
   }) {
     return ExpenseModel(
       id: id ?? this.id,
@@ -52,6 +60,7 @@ class ExpenseModel extends ExpenseEntity {
       groupId: groupId ?? this.groupId,
       date: date ?? this.date,
       category: category ?? this.category,
+      type: type ?? this.type,
     );
   }
 }

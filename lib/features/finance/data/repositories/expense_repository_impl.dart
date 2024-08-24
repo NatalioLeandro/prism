@@ -29,6 +29,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
     required DateTime date,
     required String groupId,
     required category,
+    required type,
   }) async {
     return _getExpenseEntity(
       () async => await _expenseRemoteDataSource.createExpense(
@@ -40,6 +41,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
           groupId: groupId,
           date: date,
           category: category,
+          type: type,
         ),
       ),
     );
@@ -105,6 +107,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
     required String groupId,
     required DateTime date,
     required category,
+    required type,
   }) async {
     return _getExpenseEntity(
       () async => await _expenseRemoteDataSource.updateExpense(
@@ -116,6 +119,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
           groupId: groupId,
           date: date,
           category: category,
+          type: type,
         ),
       ),
     );

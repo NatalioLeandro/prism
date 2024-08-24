@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 /* Package Imports */
 import 'package:prism/core/enums/expense_category.dart';
+import 'package:prism/core/enums/expense_type.dart';
 
 class Constants {
   static const connectionError = 'Sem conexão com a internet.';
@@ -24,5 +25,15 @@ class Constants {
     'Saúde': const Color(0xFF9575CD),
     'Educação': const Color(0xFF4DB6AC),
     'Outros': const Color(0xFFA1887F),
+  };
+
+  final Map<String, ExpenseType> typeMap = {
+    'Fixa': ExpenseType.fixed,
+    'Variável': ExpenseType.variable,
+  };
+
+  final Map<ExpenseType, Color> typeColorMap = {
+    ExpenseType.fixed: const Color(0xFF4CAF50),
+    ExpenseType.variable: const Color(0xFFE57373),
   };
 }

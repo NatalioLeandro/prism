@@ -4,6 +4,7 @@ import 'package:fpdart/fpdart.dart';
 /* Project Imports */
 import 'package:prism/features/finance/domain/entities/expense.dart';
 import 'package:prism/core/enums/expense_category.dart';
+import 'package:prism/core/enums/expense_type.dart';
 import 'package:prism/core/errors/failures.dart';
 
 abstract interface class ExpenseRepository {
@@ -14,6 +15,7 @@ abstract interface class ExpenseRepository {
     required String groupId,
     required DateTime date,
     required ExpenseCategory category,
+    required ExpenseType type,
   });
 
   Future<Either<Failure, void>> removeExpense({
@@ -29,6 +31,7 @@ abstract interface class ExpenseRepository {
     required String groupId,
     required DateTime date,
     required ExpenseCategory category,
+    required ExpenseType type,
   });
 
   Future<Either<Failure, ExpenseEntity>> getExpense({
