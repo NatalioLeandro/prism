@@ -36,55 +36,55 @@ class _FinanceListGridState extends State<FinanceListGrid> {
     _loadGroups();
   }
 
-  void _loadFinances() {
+  Future<void> _loadFinances() async {
     context.read<FinanceBloc>().add(
-          FinanceLoadEvent(userId: context.read<UserCubit>().state.id),
-        );
+      FinanceLoadEvent(userId: context.read<UserCubit>().state.id),
+    );
   }
 
   void _loadGroups() {
     context.read<GroupsBloc>().add(
-          GroupsGetAllEvent(userId: context.read<UserCubit>().state.id),
-        );
+      GroupsGetAllEvent(userId: context.read<UserCubit>().state.id),
+    );
   }
 
   void _searchFinances(String query) {
     setState(
-      () {
+          () {
         _filteredFinances = _allFinances
             .where(
               (finance) =>
-                  finance.title.toLowerCase().contains(query.toLowerCase()) ||
-                  finance.category.name
-                      .toLowerCase()
-                      .contains(query.toLowerCase()) ||
-                  Constants()
-                      .categoryMap
-                      .keys
-                      .firstWhere(
-                        (key) =>
-                            Constants().categoryMap[key] == finance.category,
-                        orElse: () => '',
-                      )
-                      .toLowerCase()
-                      .contains(
-                        query.toLowerCase(),
-                      ) ||
-                  finance.type.name
-                      .toLowerCase()
-                      .contains(query.toLowerCase()) ||
-                  Constants()
-                      .typeMap
-                      .keys
-                      .firstWhere(
-                        (key) => Constants().typeMap[key] == finance.type,
-                        orElse: () => '',
-                      )
-                      .toLowerCase()
-                      .contains(
-                        query.toLowerCase(),
-                      ),
-            )
+          finance.title.toLowerCase().contains(query.toLowerCase()) ||
+              finance.category.name
+                  .toLowerCase()
+                  .contains(query.toLowerCase()) ||
+              Constants()
+                  .categoryMap
+                  .keys
+                  .firstWhere(
+                    (key) =>
+                Constants().categoryMap[key] == finance.category,
+                orElse: () => '',
+              )
+                  .toLowerCase()
+                  .contains(
+                query.toLowerCase(),
+              ) ||
+              finance.type.name
+                  .toLowerCase()
+                  .contains(query.toLowerCase()) ||
+              Constants()
+                  .typeMap
+                  .keys
+                  .firstWhere(
+                    (key) => Constants().typeMap[key] == finance.type,
+                orElse: () => '',
+              )
+                  .toLowerCase()
+                  .contains(
+                query.toLowerCase(),
+              ),
+        )
             .toList();
       },
     );
@@ -141,39 +141,59 @@ class _FinanceListGridState extends State<FinanceListGrid> {
                 _filteredFinances = _allFinances;
               }
 
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          FinanceSearch(onSearch: _searchFinances),
-                        ],
+              return RefreshIndicator(
+                onRefresh: _loadFinances,
+                child: _filteredFinances.isEmpty
+                    ? Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'Nenhuma finança encontrada.',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).colorScheme.onPrimary,
                       ),
+                      textAlign: TextAlign.center,
                     ),
-                    Wrap(
-                      runSpacing: 5,
-                      children: _filteredFinances
-                          .map(
-                            (expense) => FinanceCard(
-                              expense: expense,
-                              groupMap: _groupMap,
-                              onDelete: () {
-                                context.read<FinanceBloc>().add(
-                                      FinanceRemoveEvent(
-                                        userId:
-                                            context.read<UserCubit>().state.id,
-                                        id: expense.id,
-                                      ),
-                                    );
-                              },
-                            ),
-                          )
-                          .toList(),
-                    ),
-                  ],
+                  ),
+                )
+                    : SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            FinanceSearch(onSearch: _searchFinances),
+                          ],
+                        ),
+                      ),
+                      Wrap(
+                        runSpacing: 5,
+                        children: _filteredFinances
+                            .map(
+                              (expense) => FinanceCard(
+                            expense: expense,
+                            groupMap: _groupMap,
+                            onDelete: () {
+                              context.read<FinanceBloc>().add(
+                                FinanceRemoveEvent(
+                                  userId: context
+                                      .read<UserCubit>()
+                                      .state
+                                      .id,
+                                  id: expense.id,
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                            .toList(),
+                      ),
+                    ],
+                  ),
                 ),
               );
             } else {

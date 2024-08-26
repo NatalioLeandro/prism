@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 /* Package Imports */
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 /* Project Imports */
 import 'package:prism/features/groups/presentation/widgets/group_member_card.dart';
@@ -21,7 +22,6 @@ import 'package:prism/core/utils/drawn_divider.dart';
 import 'package:prism/core/utils/show_dialog.dart';
 import 'package:prism/core/enums/alert_type.dart';
 import 'package:prism/core/themes/theme.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class GroupDetailPage extends StatefulWidget {
   final GroupEntity group;
@@ -111,128 +111,133 @@ class _GroupDetailState extends State<GroupDetailPage> {
         ],
         toolbarHeight: 80,
       ),
-      body: BlocConsumer<GroupsBloc, GroupsState>(
-        listener: (context, state) {
-          if (state is GroupsErrorState) {
-            showMessageDialog(
-              context,
-              title: 'Ops...',
-              message: state.message,
-              type: AlertType.error,
-              onConfirm: () {},
-            );
-          } else if (state is GroupsGetMembersSuccessState) {
-            setState(() {
-              members = state.members;
-            });
-          } else if (state is GroupsGetExpensesSuccessState) {
-            setState(() {
-              expenses = state.expenses;
-            });
-          } else if (state is GroupsAddMemberSuccessState) {
-            _loadGroupDetails();
-          }
+      body: RefreshIndicator(
+        onRefresh: () async {
+          _loadGroupDetails();
         },
-        builder: (context, state) {
-          if (state is GroupsLoadingState) {
-            return const Loader();
-          }
+        child: BlocConsumer<GroupsBloc, GroupsState>(
+          listener: (context, state) {
+            if (state is GroupsErrorState) {
+              showMessageDialog(
+                context,
+                title: 'Ops...',
+                message: state.message,
+                type: AlertType.error,
+                onConfirm: () {},
+              );
+            } else if (state is GroupsGetMembersSuccessState) {
+              setState(() {
+                members = state.members;
+              });
+            } else if (state is GroupsGetExpensesSuccessState) {
+              setState(() {
+                expenses = state.expenses;
+              });
+            } else if (state is GroupsAddMemberSuccessState) {
+              _loadGroupDetails();
+            }
+          },
+          builder: (context, state) {
+            if (state is GroupsLoadingState) {
+              return const Loader();
+            }
 
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            widget.group.description,
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.onPrimary,
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              widget.group.description,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 10),
-                        QrImageView(
-                          data: '${widget.group.id}|${widget.group.owner}',
-                          version: QrVersions.auto,
-                          size: 150.0,
-                        ),
-                      ],
+                          const SizedBox(width: 10),
+                          QrImageView(
+                            data: '${widget.group.id}|${widget.group.owner}',
+                            version: QrVersions.auto,
+                            size: 150.0,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  dividerWithText('Proprietário'),
-                  const SizedBox(height: 10),
-                  if (members.isNotEmpty)
-                    MemberCard(member: members.firstWhere((member) {
-                      return member.id == widget.group.owner;
-                    }))
-                  else
-                    const Center(
-                      child: Text('Nenhum administrador encontrado.'),
-                    ),
-                  const SizedBox(height: 10),
-                  dividerWithText('Membros'),
-                  const SizedBox(height: 10),
-                  members.isNotEmpty
-                      ? Wrap(
-                          spacing: 5.0,
-                          runSpacing: 5.0,
-                          children: members.map((member) {
-                            return MemberCard(member: member);
-                          }).toList(),
-                        )
-                      : const Center(
-                          child: Text('Nenhum membro adicionado.'),
-                        ),
-                  const SizedBox(height: 10),
-                  dividerWithText('Despesas'),
-                  const SizedBox(height: 10),
-                  expenses.isNotEmpty
-                      ? Wrap(
-                          spacing: 5,
-                          runSpacing: 5,
-                          children: expenses.map((expense) {
-                            return SizedBox(
-                              width:
-                                  (MediaQuery.of(context).size.width / 2) - 16,
-                              child: FinanceCard(
-                                expense: expense,
-                                groupMap: groupMap,
-                                onDelete: () {
-                                  context.read<FinanceBloc>().add(
-                                        FinanceRemoveEvent(
-                                          userId: context
-                                              .read<UserCubit>()
-                                              .state
-                                              .id,
-                                          id: expense.id,
-                                        ),
-                                      );
-                                },
-                              ),
-                            );
-                          }).toList(),
-                        )
-                      : const Center(
-                          child: Text('Nenhuma despesa registrada.'),
-                        ),
-                  const SizedBox(height: 10),
-                ],
+                    const SizedBox(height: 10),
+                    dividerWithText('Proprietário'),
+                    const SizedBox(height: 10),
+                    if (members.isNotEmpty)
+                      MemberCard(member: members.firstWhere((member) {
+                        return member.id == widget.group.owner;
+                      }))
+                    else
+                      const Center(
+                        child: Text('Nenhum administrador encontrado.'),
+                      ),
+                    const SizedBox(height: 10),
+                    dividerWithText('Membros'),
+                    const SizedBox(height: 10),
+                    members.isNotEmpty
+                        ? Wrap(
+                            spacing: 5.0,
+                            runSpacing: 5.0,
+                            children: members.map((member) {
+                              return MemberCard(member: member);
+                            }).toList(),
+                          )
+                        : const Center(
+                            child: Text('Nenhum membro adicionado.'),
+                          ),
+                    const SizedBox(height: 10),
+                    dividerWithText('Despesas'),
+                    const SizedBox(height: 10),
+                    expenses.isNotEmpty
+                        ? Wrap(
+                            spacing: 5,
+                            runSpacing: 5,
+                            children: expenses.map((expense) {
+                              return SizedBox(
+                                width:
+                                    (MediaQuery.of(context).size.width / 2) - 16,
+                                child: FinanceCard(
+                                  expense: expense,
+                                  groupMap: groupMap,
+                                  onDelete: () {
+                                    context.read<FinanceBloc>().add(
+                                          FinanceRemoveEvent(
+                                            userId: context
+                                                .read<UserCubit>()
+                                                .state
+                                                .id,
+                                            id: expense.id,
+                                          ),
+                                        );
+                                  },
+                                ),
+                              );
+                            }).toList(),
+                          )
+                        : const Center(
+                            child: Text('Nenhuma despesa registrada.'),
+                          ),
+                    const SizedBox(height: 10),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: 'back_to_groups',

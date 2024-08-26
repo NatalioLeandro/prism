@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 /* Package Imports */
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 /* Project Imports */
 import 'package:prism/features/groups/presentation/widgets/group_form.dart';
 import 'package:prism/features/home/presentation/widgets/menu_button.dart';
 import 'package:prism/features/groups/presentation/bloc/groups_bloc.dart';
-
 import 'package:prism/features/home/presentation/widgets/app_header.dart';
 import 'package:prism/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:prism/core/common/cubit/theme/theme_cubit.dart';
@@ -99,7 +97,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
           return const Center(
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(20.0),
                 child: GroupForm(),
               ),
             ),
