@@ -185,6 +185,7 @@ class _FinanceListGridState extends State<FinanceListGrid> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'create_finance',
         onPressed: () {
           Navigator.of(context).pushNamed(
             routes.createFinance,

@@ -50,6 +50,7 @@ class _GroupFormState extends State<GroupForm> {
               return null;
             },
           ),
+          const SizedBox(height: 10),
           CustomFormField(
             hint: 'Digite a descrição',
             label: 'Descrição',
@@ -62,6 +63,7 @@ class _GroupFormState extends State<GroupForm> {
               return null;
             },
           ),
+          const SizedBox(height: 10),
           CustomButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {

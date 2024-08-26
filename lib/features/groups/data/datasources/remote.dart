@@ -175,6 +175,13 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
       await document.update({
         'members': FieldValue.arrayUnion([user]),
       });
+
+      final newDocument = _firestore.doc('users/$owner/groups/$groupId');
+      final group = await newDocument.get();
+      final groupData = group.data() as Map<String, dynamic>;
+
+      final newDocumentMember = _firestore.doc('users/$user/groups/$groupId');
+      await newDocumentMember.set(groupData);
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     }
@@ -202,16 +209,45 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
     required String groupId,
   }) async {
     try {
-      final expensesCollection =
+      final ownerExpensesCollection =
           await _firestore.collection('users/$owner/expenses').get();
-      final expensesData =
-          expensesCollection.docs.map((doc) => doc.data()).toList();
+      final ownerExpensesData =
+      ownerExpensesCollection.docs.map((doc) => doc.data()).toList();
 
-      final groupExpenses = expensesData
+      final ownerExpenses = ownerExpensesData
           .where((expense) => expense['groupId'] == groupId)
           .toList();
 
-      return groupExpenses.map((data) => ExpenseModel.fromJson(data)).toList();
+      final members = await getGroupMembers(owner: owner, groupId: groupId);
+      final memberIds = members.map((member) => member.id).toList();
+
+      final membersExpenses = await Future.wait(
+        memberIds.map((memberId) async {
+          final memberExpensesCollection =
+              await _firestore.collection('users/$memberId/expenses').get();
+          final memberExpensesData =
+              memberExpensesCollection.docs.map((doc) => doc.data()).toList();
+
+          return memberExpensesData
+              .where((expense) => expense['groupId'] == groupId)
+              .toList();
+        }),
+      );
+
+      final groupExpenses = ownerExpenses + membersExpenses.expand((element) => element).toList();
+
+      final groupExpensesMap = groupExpenses.fold<Map<String, dynamic>>(
+        {},
+        (acc, expense) {
+          final id = expense['id'];
+          if (!acc.containsKey(id)) {
+            acc[id] = expense;
+          }
+          return acc;
+        },
+      );
+
+      return groupExpensesMap.values.map((expense) => ExpenseModel.fromJson(expense)).toList();
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     }

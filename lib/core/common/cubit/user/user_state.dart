@@ -4,6 +4,7 @@ part of 'user_cubit.dart';
 sealed class UserState {
   get id => null;
   double get balance => 0;
+  AccountType get account => AccountType.free;
 }
 
 class UserInitialState extends UserState {}
@@ -18,4 +19,7 @@ class UserLoggedInState extends UserState {
 
   @override
   double get balance => user.fixedIncome;
+
+  @override
+  AccountType get account => user.account;
 }

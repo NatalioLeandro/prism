@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 /* Project Imports */
 import 'package:prism/core/common/entities/user.dart';
+import 'package:prism/core/enums/account_type.dart';
 
 part 'user_state.dart';
 

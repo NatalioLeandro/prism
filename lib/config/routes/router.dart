@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:prism/features/finance/presentation/pages/create_finance.dart';
 import 'package:prism/features/auth/presentation/pages/password_recover.dart';
 import 'package:prism/features/groups/presentation/pages/group_details.dart';
+import 'package:prism/features/groups/presentation/pages/create_group.dart';
 import 'package:prism/features/auth/presentation/pages/register.dart';
 import 'package:prism/features/auth/presentation/pages/login.dart';
+import 'package:prism/features/groups/presentation/pages/scanner.dart';
 import 'package:prism/features/home/presentation/pages/home.dart';
 import 'package:prism/features/groups/domain/entities/group.dart';
 import 'package:prism/core/common/widgets/splash.dart';
@@ -14,9 +16,11 @@ import 'package:prism/core/common/widgets/splash.dart';
 const String splash = '/';
 const String home = '/home';
 const String login = '/login';
+const String scanner = '/scanner';
 const String register = '/register';
 const String transaction = '/transaction';
 const String groupDetail = '/group-detail';
+const String createGroup = '/create-group';
 const String createFinance = '/create-finance';
 const String passwordRecover = '/password-recover';
 
@@ -41,6 +45,14 @@ Route controller(RouteSettings settings) {
     case createFinance:
       return MaterialPageRoute(
         builder: (_) => const CreateFinancePage(),
+      );
+      case scanner:
+      return MaterialPageRoute(
+        builder: (_) => const QRScannerPage(),
+      );
+    case createGroup:
+      return MaterialPageRoute(
+        builder: (_) => const CreateGroupPage(),
       );
     case groupDetail:
       final group = settings.arguments as GroupEntity;

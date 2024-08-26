@@ -1,4 +1,7 @@
+/* Flutter Imports */
 import 'package:flutter/material.dart';
+
+/* Project Imports */
 import 'package:prism/core/common/entities/user.dart';
 
 class MemberCard extends StatelessWidget {
@@ -13,12 +16,15 @@ class MemberCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(5.0),
       ),
-      elevation: 4,
-      margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
       child: ListTile(
-        contentPadding: const EdgeInsets.all(16.0),
+        contentPadding: const EdgeInsets.fromLTRB(
+          10,
+          5,
+          10,
+          5,
+        ),
         title: Text(
           member.name,
           style: const TextStyle(
@@ -27,17 +33,20 @@ class MemberCard extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          member.email, // Supondo que `UserEntity` tem um campo `email`
-          style: const TextStyle(
-            color: Colors.grey,
+          member.email,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onPrimary,
             fontSize: 14,
           ),
         ),
         leading: CircleAvatar(
-          backgroundColor: Colors.blueGrey,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
           child: Text(
             member.name.isNotEmpty ? member.name[0] : '?',
-            style: const TextStyle(color: Colors.white),
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSecondary,
+              fontSize: 18,
+            ),
           ),
         ),
       ),
