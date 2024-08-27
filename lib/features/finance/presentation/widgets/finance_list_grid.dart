@@ -143,6 +143,8 @@ class _FinanceListGridState extends State<FinanceListGrid> {
 
               return RefreshIndicator(
                 onRefresh: _loadFinances,
+                color: Theme.of(context).colorScheme.secondary,
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 child: _filteredFinances.isEmpty
                     ? Center(
                   child: Padding(

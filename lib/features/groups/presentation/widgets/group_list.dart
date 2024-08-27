@@ -44,6 +44,8 @@ class _GroupListState extends State<GroupList> {
         onRefresh: () async {
           _loadAllGroups();
         },
+        color: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         child: BlocConsumer<GroupsBloc, GroupsState>(
           listener: (context, state) {
             if (state is GroupsErrorState) {

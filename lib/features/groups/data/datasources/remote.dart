@@ -83,6 +83,16 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
   }) async {
     try {
       final groupDocument = _firestore.doc('users/$owner/groups/$groupId');
+      final groupData = await groupDocument.get();
+      final members = groupData.data()!['members'] as List<dynamic>;
+
+      await Future.wait(
+        members.map((member) async {
+          final memberDocument = _firestore.doc('users/$member/groups/$groupId');
+          await memberDocument.delete();
+        }),
+      );
+
       await groupDocument.delete();
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());

@@ -72,6 +72,24 @@ class _GroupDetailState extends State<GroupDetailPage> {
     );
   }
 
+  void _showDeleteGroupConfirmation() {
+    showMessageDialog(
+      context,
+      title: 'Excluir Grupo',
+      message:
+          'Você tem certeza que deseja excluir o grupo? Essa ação não pode ser desfeita.',
+      type: AlertType.warning,
+      onConfirm: () {
+        context.read<GroupsBloc>().add(GroupsRemoveEvent(
+              userId: context.read<UserCubit>().state.id,
+              id: widget.group.id,
+            ));
+        Navigator.pop(context);
+      },
+      onDismiss: () {},
+    );
+  }
+
   void _switchTheme() {
     final currentTheme = context.read<ThemeCubit>().state;
     ThemeData newTheme;
@@ -89,6 +107,7 @@ class _GroupDetailState extends State<GroupDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isOwner = context.read<UserCubit>().state.id == widget.group.owner;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -115,6 +134,8 @@ class _GroupDetailState extends State<GroupDetailPage> {
         onRefresh: () async {
           _loadGroupDetails();
         },
+        color: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         child: BlocConsumer<GroupsBloc, GroupsState>(
           listener: (context, state) {
             if (state is GroupsErrorState) {
@@ -158,10 +179,16 @@ class _GroupDetailState extends State<GroupDetailPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: Text(
-                              widget.group.description,
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                            child: Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Text(
+                                widget.group.description[0].toUpperCase() +
+                                    widget.group.description.substring(1),
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                ),
                               ),
                             ),
                           ),
@@ -170,6 +197,14 @@ class _GroupDetailState extends State<GroupDetailPage> {
                             data: '${widget.group.id}|${widget.group.owner}',
                             version: QrVersions.auto,
                             size: 150.0,
+                            eyeStyle: QrEyeStyle(
+                              eyeShape: QrEyeShape.square,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                            dataModuleStyle: QrDataModuleStyle(
+                              dataModuleShape: QrDataModuleShape.square,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
                           ),
                         ],
                       ),
@@ -178,9 +213,35 @@ class _GroupDetailState extends State<GroupDetailPage> {
                     dividerWithText('Proprietário'),
                     const SizedBox(height: 10),
                     if (members.isNotEmpty)
-                      MemberCard(member: members.firstWhere((member) {
-                        return member.id == widget.group.owner;
-                      }))
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          MemberCard(member: members.firstWhere((member) {
+                            return member.id == widget.group.owner;
+                          })),
+                          if (isOwner)
+                            Padding(
+                              padding: const EdgeInsets.all(3),
+                              child: ElevatedButton.icon(
+                                onPressed: _showDeleteGroupConfirmation,
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                                label: const Text('Excluir Grupo'),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      Theme.of(context).colorScheme.primary,
+                                  foregroundColor:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
+                      )
                     else
                       const Center(
                         child: Text('Nenhum administrador encontrado.'),
@@ -208,8 +269,8 @@ class _GroupDetailState extends State<GroupDetailPage> {
                             runSpacing: 5,
                             children: expenses.map((expense) {
                               return SizedBox(
-                                width:
-                                    (MediaQuery.of(context).size.width / 2) - 16,
+                                width: (MediaQuery.of(context).size.width / 2) -
+                                    16,
                                 child: FinanceCard(
                                   expense: expense,
                                   groupMap: groupMap,

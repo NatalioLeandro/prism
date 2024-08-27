@@ -23,14 +23,32 @@ class GroupListItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(5.0),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.3),
+              blurRadius: 1.0,
+              offset: const Offset(0.0, 1.0),
+            ),
+          ],
         ),
         child: ListTile(
+          leading: Icon(
+            Icons.group,
+            color: Theme.of(context).colorScheme.secondary,
+            size: 20.0,
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            color: Theme.of(context).colorScheme.secondary,
+            size: 20.0,
+          ),
           title: Column(
             children: [
               Text(
-                group.name,
+                group.name.toUpperCase(),
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
+                  fontSize: 14.0,
                   letterSpacing: 1.2,
                 ),
               ),
@@ -39,7 +57,10 @@ class GroupListItem extends StatelessWidget {
           ),
           subtitle: Column(
             children: [
-              Text(group.description),
+              Text(
+                group.description[0].toUpperCase() + group.description.substring(1),
+                textAlign: TextAlign.center,
+              ),
             ],
           ),
           onTap: () {
