@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 
 /* Package Imports */
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prism/features/finance/presentation/pages/finances.dart';
-import 'package:prism/features/groups/presentation/pages/groups.dart';
 
 /* Project Imports */
 import 'package:prism/features/home/presentation/widgets/user_information_card.dart';
 import 'package:prism/features/home/presentation/widgets/navigation_bar.dart';
+import 'package:prism/features/finance/presentation/bloc/finance_bloc.dart';
 import 'package:prism/features/home/presentation/widgets/menu_button.dart';
 import 'package:prism/features/home/presentation/widgets/app_header.dart';
+import 'package:prism/features/finance/presentation/pages/finances.dart';
+import 'package:prism/features/reports/presentation/widgets/charts.dart';
+import 'package:prism/features/groups/presentation/pages/groups.dart';
 import 'package:prism/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:prism/core/common/cubit/theme/theme_cubit.dart';
 import 'package:prism/core/common/cubit/user/user_cubit.dart';
@@ -29,10 +31,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 1;
 
+  @override
+  void initState() {
+    super.initState();
+    _loadFinances();
+  }
+
   void _onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  Future<void> _loadFinances() async {
+    context.read<FinanceBloc>().add(
+          FinanceLoadEvent(userId: context.read<UserCubit>().state.id),
+        );
   }
 
   void _showLogoutConfirmation(BuildContext context) {
@@ -97,16 +111,27 @@ class _HomePageState extends State<HomePage> {
         },
         child: IndexedStack(
           index: _currentIndex,
-          children: const [
-            Center(child: GroupPage()),
-            Center(
-              child: Column(
-                children: [
-                  UserInfoCard(),
-                ],
+          children: [
+            const Center(child: GroupPage()),
+            RefreshIndicator(
+              onRefresh: _loadFinances,
+              child: const SingleChildScrollView(
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Column(
+                      children: [
+                        UserInfoCard(),
+                        Charts(),
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
-            Center(child: FinancePage()),
+            const Center(
+              child: FinancePage(),
+            ),
           ],
         ),
       ),

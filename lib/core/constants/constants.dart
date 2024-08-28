@@ -9,6 +9,21 @@ class Constants {
   static const connectionError = 'Sem conexão com a internet.';
   static const unexpectedError = 'Ocorreu um erro inesperado.';
 
+  final Map<String, Color> monthColors = {
+    "Jan": const Color(0xFF004B23),
+    "Fev": const Color(0xFF006400),
+    "Mar": const Color(0xFF007200),
+    "Abr": const Color(0xFF008000),
+    "Mai": const Color(0xFF38B000),
+    "Jun": const Color(0xFF70E000),
+    "Jul": const Color(0xFF9EF01A),
+    "Ago": const Color(0xFFCCFF33),
+    "Set": const Color(0xFFB5E7A0),
+    "Out": const Color(0xFF81C784),
+    "Nov": const Color(0xFF4CAF50),
+    "Dez": const Color(0xFF2E7D32),
+  };
+
   final Map<String, ExpenseCategory> categoryMap = {
     'Alimentação': ExpenseCategory.food,
     'Transporte': ExpenseCategory.transport,
