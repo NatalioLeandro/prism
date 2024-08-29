@@ -152,7 +152,7 @@ class _FinanceListGridState extends State<FinanceListGrid> {
                     child: Text(
                       'Nenhuma finança encontrada.',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         color: Theme.of(context).colorScheme.onPrimary,
                       ),
                       textAlign: TextAlign.center,

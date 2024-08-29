@@ -115,6 +115,8 @@ class _HomePageState extends State<HomePage> {
             const Center(child: GroupPage()),
             RefreshIndicator(
               onRefresh: _loadFinances,
+              color: Theme.of(context).colorScheme.secondary,
+              backgroundColor: Theme.of(context).colorScheme.primary,
               child: const SingleChildScrollView(
                 child: Center(
                   child: Padding(

@@ -1,7 +1,13 @@
+/* Flutter Imports */
 import 'package:flutter/material.dart';
+
+/* Package Imports */
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+/* Project Imports */
 import 'package:prism/features/auth/presentation/bloc/auth_bloc.dart';
-import '../../../../core/common/entities/user.dart';
+import 'package:prism/core/common/entities/user.dart';
+import 'package:prism/core/themes/palette.dart';
 
 class UserInfoCard extends StatelessWidget {
   const UserInfoCard({super.key});
@@ -58,7 +64,7 @@ class UserInfoCard extends StatelessWidget {
               const SizedBox(height: 20),
               CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  Theme.of(context).colorScheme.onPrimary,
+                  Theme.of(context).colorScheme.secondary,
                 ),
               ),
             ],
@@ -77,23 +83,80 @@ class UserInfoCard extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Editar Renda Fixa'),
-          content: TextField(
-            controller: incomeController,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              labelText: 'Nova Renda Fixa',
-              prefixText: 'R\$ ',
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          title: Text(
+            'Editar Renda Fixa',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
           ),
-          actions: <Widget>[
+          content: Container(
+            height: 80,
+            alignment: Alignment.center,
+            child: SingleChildScrollView(
+              child: TextField(
+                controller: incomeController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'Nova Renda Fixa',
+                  prefixText: 'R\$ ',
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  ),
+                ),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+            ),
+          ),
+          actions: [
             TextButton(
+              style: ButtonStyle(
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+                overlayColor:
+                WidgetStateProperty.all(Palette.primary.withOpacity(0.1)),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Cancelar'),
+              child: Text(
+                'Cancelar',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
             ),
             ElevatedButton(
+              style: ButtonStyle(
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+                backgroundColor:
+                WidgetStateProperty.all(Palette.primary),
+              ),
               onPressed: () {
                 final newIncome = double.tryParse(incomeController.text);
                 if (newIncome != null) {
