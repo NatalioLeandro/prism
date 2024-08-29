@@ -38,7 +38,7 @@ class _PieChartCategoriesState extends State<PieChartCategories> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              'Distribuição de Despesas por Categoria',
+              'Despesas por Categoria',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,

@@ -35,7 +35,7 @@ class FixedIncomeVsExpensesChart extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              'Compare seus gastos',
+              'Seus Gastos',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,

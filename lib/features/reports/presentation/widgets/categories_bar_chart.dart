@@ -40,7 +40,7 @@ class _BarChartCategoriesState extends State<BarChartCategories> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              'Distribuição de Despesas por Categoria',
+              'Despesas por Categoria',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,
