@@ -208,6 +208,10 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
       await document.update({
         'members': FieldValue.arrayRemove([user]),
       });
+
+      final memberDocument = _firestore.doc('users/$user/groups/$groupId');
+      await memberDocument.delete();
+
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     }

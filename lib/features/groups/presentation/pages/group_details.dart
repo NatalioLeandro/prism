@@ -156,6 +156,8 @@ class _GroupDetailState extends State<GroupDetailPage> {
               });
             } else if (state is GroupsAddMemberSuccessState) {
               _loadGroupDetails();
+            } else if (state is GroupsRemoveMemberSuccessState) {
+              _loadGroupDetails();
             }
           },
           builder: (context, state) {
@@ -163,137 +165,153 @@ class _GroupDetailState extends State<GroupDetailPage> {
               return const Loader();
             }
 
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: Text(
-                                widget.group.description[0].toUpperCase() +
-                                    widget.group.description.substring(1),
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          QrImageView(
-                            data: '${widget.group.id}|${widget.group.owner}',
-                            version: QrVersions.auto,
-                            size: 150.0,
-                            eyeStyle: QrEyeStyle(
-                              eyeShape: QrEyeShape.square,
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                            dataModuleStyle: QrDataModuleStyle(
-                              dataModuleShape: QrDataModuleShape.square,
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    dividerWithText('Proprietário'),
-                    const SizedBox(height: 10),
-                    if (members.isNotEmpty)
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          MemberCard(member: members.firstWhere((member) {
-                            return member.id == widget.group.owner;
-                          })),
-                          if (isOwner)
-                            Padding(
-                              padding: const EdgeInsets.all(3),
-                              child: ElevatedButton.icon(
-                                onPressed: _showDeleteGroupConfirmation,
-                                icon: const Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
-                                ),
-                                label: const Text('Excluir Grupo'),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      Theme.of(context).colorScheme.primary,
-                                  foregroundColor:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5),
+            return RefreshIndicator(
+              onRefresh: () async {
+                _loadGroupDetails();
+              },
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: Text(
+                                  widget.group.description[0].toUpperCase() +
+                                      widget.group.description.substring(1),
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
                                   ),
                                 ),
                               ),
                             ),
-                        ],
-                      )
-                    else
-                      const Center(
-                        child: Text('Nenhum administrador encontrado.'),
+                            const SizedBox(width: 10),
+                            QrImageView(
+                              data: '${widget.group.id}|${widget.group.owner}',
+                              version: QrVersions.auto,
+                              size: 150.0,
+                              eyeStyle: QrEyeStyle(
+                                eyeShape: QrEyeShape.square,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                              dataModuleStyle: QrDataModuleStyle(
+                                dataModuleShape: QrDataModuleShape.square,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    const SizedBox(height: 10),
-                    dividerWithText('Membros'),
-                    const SizedBox(height: 10),
-                    members.isNotEmpty
-                        ? Wrap(
-                            spacing: 5.0,
-                            runSpacing: 5.0,
-                            children: members.map((member) {
-                              return MemberCard(member: member);
-                            }).toList(),
-                          )
-                        : const Center(
-                            child: Text('Nenhum membro adicionado.'),
-                          ),
-                    const SizedBox(height: 10),
-                    dividerWithText('Despesas'),
-                    const SizedBox(height: 10),
-                    expenses.isNotEmpty
-                        ? Wrap(
-                            spacing: 5,
-                            runSpacing: 5,
-                            children: expenses.map((expense) {
-                              return SizedBox(
-                                width: (MediaQuery.of(context).size.width / 2) -
-                                    16,
-                                child: FinanceCard(
-                                  expense: expense,
-                                  groupMap: groupMap,
-                                  onDelete: () {
-                                    context.read<FinanceBloc>().add(
-                                          FinanceRemoveEvent(
-                                            userId: context
-                                                .read<UserCubit>()
-                                                .state
-                                                .id,
-                                            id: expense.id,
-                                          ),
-                                        );
-                                  },
+                      const SizedBox(height: 10),
+                      dividerWithText('Proprietário'),
+                      const SizedBox(height: 10),
+                      if (members.isNotEmpty)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            MemberCard(
+                              member: members.firstWhere((member) {
+                                return member.id == widget.group.owner;
+                              }),
+                              groupId: widget.group.id,
+                              ownerId: widget.group.owner,
+                              currentUserId: context.read<UserCubit>().state.id,
+                            ),
+                            if (isOwner)
+                              Padding(
+                                padding: const EdgeInsets.all(3),
+                                child: ElevatedButton.icon(
+                                  onPressed: _showDeleteGroupConfirmation,
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  ),
+                                  label: const Text('Excluir Grupo'),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Theme.of(context).colorScheme.primary,
+                                    foregroundColor:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                  ),
                                 ),
-                              );
-                            }).toList(),
-                          )
-                        : const Center(
-                            child: Text('Nenhuma despesa registrada.'),
-                          ),
-                    const SizedBox(height: 10),
-                  ],
+                              ),
+                          ],
+                        )
+                      else
+                        const Center(
+                          child: Text('Nenhum administrador encontrado.'),
+                        ),
+                      const SizedBox(height: 10),
+                      dividerWithText('Membros'),
+                      const SizedBox(height: 10),
+                      members.isNotEmpty
+                          ? Wrap(
+                              spacing: 5.0,
+                              runSpacing: 5.0,
+                              children: members.map((member) {
+                                return MemberCard(
+                                  member: member,
+                                  groupId: widget.group.id,
+                                  ownerId: widget.group.owner,
+                                  currentUserId:
+                                      context.read<UserCubit>().state.id,
+                                );
+                              }).toList(),
+                            )
+                          : const Center(
+                              child: Text('Nenhum membro adicionado.'),
+                            ),
+                      const SizedBox(height: 10),
+                      dividerWithText('Despesas'),
+                      const SizedBox(height: 10),
+                      expenses.isNotEmpty
+                          ? Wrap(
+                              spacing: 5,
+                              runSpacing: 5,
+                              children: expenses.map((expense) {
+                                return SizedBox(
+                                  width: (MediaQuery.of(context).size.width / 2) -
+                                      16,
+                                  child: FinanceCard(
+                                    expense: expense,
+                                    groupMap: groupMap,
+                                    onDelete: () {
+                                      context.read<FinanceBloc>().add(
+                                            FinanceRemoveEvent(
+                                              userId: context
+                                                  .read<UserCubit>()
+                                                  .state
+                                                  .id,
+                                              id: expense.id,
+                                            ),
+                                          );
+                                    },
+                                  ),
+                                );
+                              }).toList(),
+                            )
+                          : const Center(
+                              child: Text('Nenhuma despesa registrada.'),
+                            ),
+                      const SizedBox(height: 10),
+                    ],
+                  ),
                 ),
               ),
             );
