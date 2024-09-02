@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 /* Package Imports */
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:prism/features/auth/presentation/widgets/auth_title.dart';
 
 /* Project Imports */
 import 'package:prism/features/groups/presentation/widgets/group_form.dart';
@@ -98,7 +99,14 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
             child: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.all(20.0),
-                child: GroupForm(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    AuthTitle(title: 'Criar Grupo'),
+                    SizedBox(height: 40),
+                    GroupForm(),
+                  ],
+                ),
               ),
             ),
           );

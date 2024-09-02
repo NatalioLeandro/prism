@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /* Project Imports */
 import 'package:prism/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:prism/core/common/entities/user.dart';
-import 'package:prism/core/themes/palette.dart';
 
 class UserInfoCard extends StatelessWidget {
   const UserInfoCard({super.key});
@@ -17,20 +16,18 @@ class UserInfoCard extends StatelessWidget {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         if (state is AuthSuccessState) {
+          final user = (state).user;
           return Card(
             child: Column(
               children: [
                 ListTile(
-                  title: Text('Nome: ${state.user.name}'),
-                  subtitle: Text('Email: ${state.user.email}'),
-                ),
-                ListTile(
                   title: Text(
-                      'Renda Fixa: R\$ ${state.user.fixedIncome.toStringAsFixed(2)}'),
+                    'Renda Fixa: R\$ ${user.fixedIncome.toStringAsFixed(2)}',
+                  ),
                   trailing: IconButton(
                     icon: const Icon(Icons.edit, size: 20),
                     onPressed: () {
-                      _showEditIncomeDialog(context, state.user);
+                      _showEditIncomeDialog(context, user);
                     },
                   ),
                 ),
@@ -42,16 +39,13 @@ class UserInfoCard extends StatelessWidget {
             child: Column(
               children: [
                 ListTile(
-                  title: Text('Nome: ${state.user.name}'),
-                  subtitle: Text('Email: ${state.user.email}'),
-                ),
-                ListTile(
                   title: Text(
-                      'Renda Fixa: R\$ ${state.user.fixedIncome.toStringAsFixed(2)}'),
+                    'Renda Fixa: R\$ ${state.user.fixedIncome.toStringAsFixed(2)}',
+                  ),
                   trailing: IconButton(
                     icon: const Icon(Icons.edit, size: 20),
                     onPressed: () {
-                      _showEditIncomeDialog(context, state.user);
+                      _showEditIncomeDialog(context, (state).user);
                     },
                   ),
                 ),
@@ -128,34 +122,23 @@ class UserInfoCard extends StatelessWidget {
           ),
           actions: [
             TextButton(
-              style: ButtonStyle(
-                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                overlayColor:
-                WidgetStateProperty.all(Palette.primary.withOpacity(0.1)),
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
               ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text(
-                'Cancelar',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
-              ),
+              child: const Text('Cancelar'),
             ),
             ElevatedButton(
               style: ButtonStyle(
-                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
+                backgroundColor: WidgetStateProperty.all<Color>(
+                  Theme.of(context).colorScheme.primary,
                 ),
-                backgroundColor:
-                WidgetStateProperty.all(Palette.primary),
+                elevation: WidgetStateProperty.all<double>(0),
               ),
               onPressed: () {
                 final newIncome = double.tryParse(incomeController.text);
