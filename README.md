@@ -18,62 +18,68 @@ Para instalar o Prism, siga as instruções abaixo:
 O Prism possui uma interface de usuário intuitiva e fácil de usar, projetada para fornecer uma experiência de
 gerenciamento financeiro eficaz e agradável.
 
-<div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px;">
-    <div style="text-align: center;">
-        <img src="assets/images/home_light.jpg" alt="Legenda da imagem" height="400px"/>
-        <p style="font-size: 10px"><em>Figura 1: Home.</em></p>
-    </div>
-    <div style="text-align: center;">
-        <img src="assets/images/home_dark.jpg" alt="Legenda da imagem" height="400px"/>
-        <p style="font-size: 10px"><em>Figura 2: Home - Tema Escuro.</em></p>
-    </div>
-    <div style="text-align: center;">
-        <img src="assets/images/create_finance.jpg" alt="Legenda da imagem" height="400px"/>
-        <p style="font-size: 10px"><em>Figura 3: Formulário Finança.</em></p>
-    </div>
-    <div style="text-align: center;">
-        <img src="assets/images/finances_light.jpg" alt="Legenda da imagem" height="400px"/>
-        <p style="font-size: 10px"><em>Figura 4: Lista de Finanças.</em></p>
-    </div>
-</div>
+<table>
+  <tr>
+    <td>
+      <img src="assets/images/home_light.jpg" alt="Legenda da imagem"  height="300"/>
+      <p style="font-size: 10px"><em>Figura 1: Home.</em></p>
+    </td>
+    <td>
+      <img src="assets/images/home_dark.jpg" alt="Legenda da imagem"  height="300"/>
+      <p style="font-size: 10px"><em>Figura 2: Home - Tema Escuro.</em></p>
+    </td>
+    <td>
+      <img src="assets/images/create_finance.jpg" alt="Legenda da imagem"  height="300"/>
+      <p style="font-size: 10px"><em>Figura 3: Formulário Finança.</em></p>
+    </td>
+    <td>
+      <img src="assets/images/finances_light.jpg" alt="Legenda da imagem"  height="300"/>
+      <p style="font-size: 10px"><em>Figura 4: Lista de Finanças.</em></p>
+    </td>
+  </tr>
+</table>
 
 <details>
-    <summary>Mais Interfaces</summary>
-    <br/>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px;">
-        <div style="text-align: center;">
-            <img src="assets/images/groups.jpg" alt="Legenda da imagem" height="400px"/>
-            <p style="font-size: 10px"><em>Figura 5: Lista de Grupos.</em></p>
-        </div>
-        <div style="text-align: center;">
-            <img src="assets/images/group.jpg" alt="Legenda da imagem" height="400px"/>
-            <p style="font-size: 10px"><em>Figura 6: Grupo.</em></p>
-        </div>
-        <div style="text-align: center;">
-            <img src="assets/images/recover.jpg" alt="Legenda da imagem" height="400px"/>
-            <p style="font-size: 10px"><em>Figura 7: Recuperação de Senha.</em></p>
-        </div>
-        <div style="text-align: center;">
-            <img src="assets/images/login.jpg" alt="Legenda da imagem" height="400px"/>
-            <p style="font-size: 10px"><em>Figura 8: Login.</em></p>
-        </div>
-        <div style="text-align: center;">
-            <img src="assets/images/register.jpg" alt="Legenda da imagem" height="400px"/>
-            <p style="font-size: 10px"><em>Figura 9: Registro.</em></p>
-        </div>
-        <div style="text-align: center;">
-            <img src="assets/images/search.jpg" alt="Legenda da imagem" height="400px"/>
-            <p style="font-size: 10px"><em>Figura 10: Filtro de Pesquisa.</em></p>
-        </div>
-        <div style="text-align: center;">
-            <img src="assets/images/create_finance_dark.jpg" alt="Legenda da imagem" height="400px"/>
-            <p style="font-size: 10px"><em>Figura 11: Formulário - Tema Escuro.</em></p>
-        </div>
-<div style="text-align: center;">
-            <img src="assets/images/finances_dark.jpg" alt="Legenda da imagem" height="400px"/>
-            <p style="font-size: 10px"><em>Figura 12: Lista de Finanças - Tema Escuro.</em></p>
-        </div>
-    </div>
+  <summary>Mais Interfaces</summary>
+  <br/>
+  <table>
+    <tr>
+      <td>
+        <img src="assets/images/groups.jpg" alt="Legenda da imagem"  height="300"/>
+        <p style="font-size: 10px"><em>Figura 5: Lista de Grupos.</em></p>
+      </td>
+      <td>
+        <img src="assets/images/group.jpg" alt="Legenda da imagem"  height="300"/>
+        <p style="font-size: 10px"><em>Figura 6: Grupo.</em></p>
+      </td>
+      <td>
+        <img src="assets/images/recover.jpg" alt="Legenda da imagem"  height="300"/>
+        <p style="font-size: 10px"><em>Figura 7: Recuperação de Senha.</em></p>
+      </td>
+      <td>
+        <img src="assets/images/login.jpg" alt="Legenda da imagem"  height="300"/>
+        <p style="font-size: 10px"><em>Figura 8: Login.</em></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="assets/images/register.jpg" alt="Legenda da imagem"  height="300"/>
+        <p style="font-size: 10px"><em>Figura 9: Registro.</em></p>
+      </td>
+      <td>
+        <img src="assets/images/search.jpg" alt="Legenda da imagem"  height="300"/>
+        <p style="font-size: 10px"><em>Figura 10: Filtro de Pesquisa.</em></p>
+      </td>
+      <td>
+        <img src="assets/images/create_finance_dark.jpg" alt="Legenda da imagem"  height="300"/>
+        <p style="font-size: 10px"><em>Figura 11: Formulário - Tema Escuro.</em></p>
+      </td>
+      <td>
+        <img src="assets/images/finances_dark.jpg" alt="Legenda da imagem"  height="300"/>
+        <p style="font-size: 10px"><em>Figura 12: Lista de Finanças - Tema Escuro.</em></p>
+      </td>
+    </tr>
+  </table>
 </details>
 
 ## Funcionalidades
