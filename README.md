@@ -20,19 +20,19 @@ gerenciamento financeiro eficaz e agradável.
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px;">
     <div style="text-align: center;">
-        <img src="assets/images/home_light.jpg" alt="Legenda da imagem" height="300px"/>
+        <img src="assets/images/home_light.jpg" alt="Legenda da imagem" height="400px"/>
         <p style="font-size: 10px"><em>Figura 1: Home.</em></p>
     </div>
     <div style="text-align: center;">
-        <img src="assets/images/home_dark.jpg" alt="Legenda da imagem" height="300px"/>
+        <img src="assets/images/home_dark.jpg" alt="Legenda da imagem" height="400px"/>
         <p style="font-size: 10px"><em>Figura 2: Home - Tema Escuro.</em></p>
     </div>
     <div style="text-align: center;">
-        <img src="assets/images/create_finance.jpg" alt="Legenda da imagem" height="300px"/>
+        <img src="assets/images/create_finance.jpg" alt="Legenda da imagem" height="400px"/>
         <p style="font-size: 10px"><em>Figura 3: Formulário Finança.</em></p>
     </div>
     <div style="text-align: center;">
-        <img src="assets/images/finances_light.jpg" alt="Legenda da imagem" height="300px"/>
+        <img src="assets/images/finances_light.jpg" alt="Legenda da imagem" height="400px"/>
         <p style="font-size: 10px"><em>Figura 4: Lista de Finanças.</em></p>
     </div>
 </div>
@@ -42,35 +42,35 @@ gerenciamento financeiro eficaz e agradável.
     <br/>
     <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px;">
         <div style="text-align: center;">
-            <img src="assets/images/groups.jpg" alt="Legenda da imagem" height="300px"/>
+            <img src="assets/images/groups.jpg" alt="Legenda da imagem" height="400px"/>
             <p style="font-size: 10px"><em>Figura 5: Lista de Grupos.</em></p>
         </div>
         <div style="text-align: center;">
-            <img src="assets/images/group.jpg" alt="Legenda da imagem" height="300px"/>
+            <img src="assets/images/group.jpg" alt="Legenda da imagem" height="400px"/>
             <p style="font-size: 10px"><em>Figura 6: Grupo.</em></p>
         </div>
         <div style="text-align: center;">
-            <img src="assets/images/recover.jpg" alt="Legenda da imagem" height="300px"/>
+            <img src="assets/images/recover.jpg" alt="Legenda da imagem" height="400px"/>
             <p style="font-size: 10px"><em>Figura 7: Recuperação de Senha.</em></p>
         </div>
         <div style="text-align: center;">
-            <img src="assets/images/login.jpg" alt="Legenda da imagem" height="300px"/>
+            <img src="assets/images/login.jpg" alt="Legenda da imagem" height="400px"/>
             <p style="font-size: 10px"><em>Figura 8: Login.</em></p>
         </div>
         <div style="text-align: center;">
-            <img src="assets/images/register.jpg" alt="Legenda da imagem" height="300px"/>
+            <img src="assets/images/register.jpg" alt="Legenda da imagem" height="400px"/>
             <p style="font-size: 10px"><em>Figura 9: Registro.</em></p>
         </div>
         <div style="text-align: center;">
-            <img src="assets/images/search.jpg" alt="Legenda da imagem" height="300px"/>
+            <img src="assets/images/search.jpg" alt="Legenda da imagem" height="400px"/>
             <p style="font-size: 10px"><em>Figura 10: Filtro de Pesquisa.</em></p>
         </div>
         <div style="text-align: center;">
-            <img src="assets/images/create_finance_dark.jpg" alt="Legenda da imagem" height="300px"/>
+            <img src="assets/images/create_finance_dark.jpg" alt="Legenda da imagem" height="400px"/>
             <p style="font-size: 10px"><em>Figura 11: Formulário - Tema Escuro.</em></p>
         </div>
 <div style="text-align: center;">
-            <img src="assets/images/finances_dark.jpg" alt="Legenda da imagem" height="300px"/>
+            <img src="assets/images/finances_dark.jpg" alt="Legenda da imagem" height="400px"/>
             <p style="font-size: 10px"><em>Figura 12: Lista de Finanças - Tema Escuro.</em></p>
         </div>
     </div>
