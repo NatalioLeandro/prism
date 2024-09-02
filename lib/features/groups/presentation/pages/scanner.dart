@@ -42,7 +42,7 @@ class _QRScannerPageState extends State<QRScannerPage> {
           showMessageDialog(
             context,
             title: 'Sucesso',
-            message: 'Membro adicionado ao grupo.',
+            message: 'Você foi adicionado ao grupo com sucesso.',
             type: AlertType.success,
             onRedirect: () {},
           );
@@ -60,11 +60,13 @@ class _QRScannerPageState extends State<QRScannerPage> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text(
-            'PRISM QR',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+          title: const Center(
+            child: Text(
+              'PRISM QR',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           shape: const RoundedRectangleBorder(
