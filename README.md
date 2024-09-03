@@ -13,6 +13,15 @@ Para instalar o Prism, siga as instruções abaixo:
 3. Execute o comando `flutter run` para compilar e instalar o aplicativo em seu dispositivo.
 4. Pronto! O Prism está instalado e pronto para uso.
 
+## Vídeo de Apresentação
+
+Para uma visão geral do Prism e suas funcionalidades, assista ao vídeo de apresentação abaixo:
+<div>
+  <a href="https://youtu.be/cLs9RvhgOfY">
+    <img src="https://img.youtube.com/vi/cLs9RvhgOfY/0.jpg" alt="Vídeo de Apresentação" height="300"/>
+  </a>
+</div>
+
 ## Interface do Usuário
 
 O Prism possui uma interface de usuário intuitiva e fácil de usar, projetada para fornecer uma experiência de
@@ -20,19 +29,21 @@ gerenciamento financeiro eficaz e agradável.
 
 <table>
   <tr>
-    <td>
+    <td height="320">
       <img src="assets/images/home_light.jpg" alt="Legenda da imagem"  height="300"/>
       <p style="font-size: 10px"><em>Figura 1: Home.</em></p>
     </td>
-    <td>
+    <td height="320">
       <img src="assets/images/home_dark.jpg" alt="Legenda da imagem"  height="300"/>
       <p style="font-size: 10px"><em>Figura 2: Home - Tema Escuro.</em></p>
     </td>
-    <td>
+</tr>
+<tr>
+    <td height="320">
       <img src="assets/images/create_finance.jpg" alt="Legenda da imagem"  height="300"/>
       <p style="font-size: 10px"><em>Figura 3: Formulário Finança.</em></p>
     </td>
-    <td>
+    <td height="320">
       <img src="assets/images/finances_light.jpg" alt="Legenda da imagem"  height="300"/>
       <p style="font-size: 10px"><em>Figura 4: Lista de Finanças.</em></p>
     </td>
@@ -44,37 +55,37 @@ gerenciamento financeiro eficaz e agradável.
   <br/>
   <table>
     <tr>
-      <td>
+      <td height="320">
         <img src="assets/images/groups.jpg" alt="Legenda da imagem"  height="300"/>
         <p style="font-size: 10px"><em>Figura 5: Lista de Grupos.</em></p>
       </td>
-      <td>
+      <td height="320">
         <img src="assets/images/group.jpg" alt="Legenda da imagem"  height="300"/>
         <p style="font-size: 10px"><em>Figura 6: Grupo.</em></p>
       </td>
-      <td>
+      <td height="320">
         <img src="assets/images/recover.jpg" alt="Legenda da imagem"  height="300"/>
         <p style="font-size: 10px"><em>Figura 7: Recuperação de Senha.</em></p>
       </td>
-      <td>
+      <td height="320">
         <img src="assets/images/login.jpg" alt="Legenda da imagem"  height="300"/>
         <p style="font-size: 10px"><em>Figura 8: Login.</em></p>
       </td>
     </tr>
     <tr>
-      <td>
+      <td height="320">
         <img src="assets/images/register.jpg" alt="Legenda da imagem"  height="300"/>
         <p style="font-size: 10px"><em>Figura 9: Registro.</em></p>
       </td>
-      <td>
+      <td height="320">
         <img src="assets/images/search.jpg" alt="Legenda da imagem"  height="300"/>
         <p style="font-size: 10px"><em>Figura 10: Filtro de Pesquisa.</em></p>
       </td>
-      <td>
+      <td height="320">
         <img src="assets/images/create_finance_dark.jpg" alt="Legenda da imagem"  height="300"/>
         <p style="font-size: 10px"><em>Figura 11: Formulário - Tema Escuro.</em></p>
       </td>
-      <td>
+      <td height="320">
         <img src="assets/images/finances_dark.jpg" alt="Legenda da imagem"  height="300"/>
         <p style="font-size: 10px"><em>Figura 12: Lista de Finanças - Tema Escuro.</em></p>
       </td>
